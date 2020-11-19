@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/19 16:40:10 by eboris           ###   ########.fr       */
+/*   Updated: 2020/11/19 17:29:42 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 			waitpid(cpid, &status, 0);
 			main->cpid = -1;
 			ft_strdel(&err_built);
-			if (status != 0)
+			if (!WIFEXITED(status))
 				sh_signal_status(status, cpid);
 		}
 	}
