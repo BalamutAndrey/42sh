@@ -1,0 +1,49 @@
+{
+    "tasks": [
+        {
+            "label": "Open Terminal",
+            "type": "shell",
+            "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "clang build active file",
+            "command": "/usr/bin/clang",
+            "args": [
+                "-g",
+                "~/work/42sh/libft/sources/*.c",
+                "~/work/42sh/srcs/*.c",
+                "~/work/42sh/srcs/func/*.c",
+                "~/work/42sh/srcs/structs/*.c",
+                "~/work/42sh/srcs/term/*.c",
+                "~/work/42sh/srcs/signal/*.c",
+                "~/work/42sh/srcs/errors/*.c",
+                "~/work/42sh/srcs/read/*.c",
+                "~/work/42sh/srcs/read/keys/*.c",
+                "~/work/42sh/srcs/lexer/*.c",
+                "~/work/42sh/srcs/exec/*.c",
+                "~/work/42sh/srcs/lexer/parser/*.c",
+                "~/work/42sh/srcs/lexer/tree/*.c",
+                "~/work/42sh/srcs/lexer/exec_struct/*.c",
+                "~/work/42sh/srcs/exec/builtin/*.c",
+                "~/work/42sh/srcs/remove/*.c",
+                "-I",
+                "~/work/42sh/includes",
+                "-I",
+                "~/work/42sh/libft/includes",
+                // "-Wall",
+                // "-Wextra",
+                // "-Werror",
+                "-lncurses",
+                "-ltermcap",
+                "-o",
+                "~/work/42sh/42sh"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
