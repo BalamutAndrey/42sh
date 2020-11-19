@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/08 15:17:35 by geliz            ###   ########.fr       */
+/*   Updated: 2020/11/19 16:40:10 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 	pid_t	cpid;
 	int16_t	error;
 	int		redir_err;
+	int		status;
 
 	redir_err = 0;
 	if (err_built || (sh_run_access(exec->argv) != 5))
@@ -66,9 +67,11 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 		else
 		{
 			main->cpid = cpid;
-			waitpid(cpid, NULL, 0);
+			waitpid(cpid, &status, 0);
 			main->cpid = -1;
 			ft_strdel(&err_built);
+			if (status != 0)
+				sh_signal_status(status, cpid);
 		}
 	}
 }

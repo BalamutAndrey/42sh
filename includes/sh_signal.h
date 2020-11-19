@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_signal.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 17:21:51 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 13:06:34 by eboris           ###   ########.fr       */
+/*   Updated: 2020/11/19 16:34:32 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 ** sh_signal.c
 */
 void	sh_signal_set(void);
+void	sh_signal_status(int status, pid_t pid);
 
 /*
 ** sh_screen_resize.c

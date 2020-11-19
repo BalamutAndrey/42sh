@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_redirects_hub.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:57 by geliz             #+#    #+#             */
-/*   Updated: 2020/10/31 17:47:36 by geliz            ###   ########.fr       */
+/*   Updated: 2020/11/19 16:41:20 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	sh_redirect_from_heredoc(t_redirect *here)
 {
 	pid_t	here_pid;
 	int		here_fd[2];
+	int		status;
 
 	pipe(here_fd);
 	here_pid = fork();
@@ -53,7 +54,9 @@ void	sh_redirect_from_heredoc(t_redirect *here)
 		dup2(here_fd[0], STDIN_FILENO);
 		close(here_fd[1]);
 		close(here_fd[0]);
-		waitpid(here_pid, NULL, 0);
+		waitpid(here_pid, &status, 0);
+		if (status != 0)
+			sh_signal_status(status, here_pid);
 	}
 }
 

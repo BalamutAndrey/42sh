@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_pipes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:08:03 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/08 13:14:43 by geliz            ###   ########.fr       */
+/*   Updated: 2020/11/19 16:40:54 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	sh_std_in_out_pipe(t_exec *exec, int fd[2], int fd2[2], t_main *main)
 {
 	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == 0)
@@ -32,14 +33,17 @@ void	sh_std_in_out_pipe(t_exec *exec, int fd[2], int fd2[2], t_main *main)
 		main->cpid = pid;
 		if (exec->next && exec->next->pipe == true)
 			sh_exec_piped_commands(exec->next, main);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 		main->cpid = -1;
+		if (status != 0)
+			sh_signal_status(status, pid);
 	}
 }
 
 void	sh_stdin_pipe(t_exec *exec, int fd[2], t_main *main)
 {
 	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == 0)
@@ -53,14 +57,17 @@ void	sh_stdin_pipe(t_exec *exec, int fd[2], t_main *main)
 		close(fd[0]);
 		close(fd[1]);
 		main->cpid = pid;
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 		main->cpid = -1;
+		if (status != 0)
+			sh_signal_status(status, pid);
 	}
 }
 
 void	sh_stdout_pipe(t_exec *exec, int fd[2], t_main *main)
 {
-	pid_t		pid;
+	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == 0)
@@ -74,8 +81,10 @@ void	sh_stdout_pipe(t_exec *exec, int fd[2], t_main *main)
 		main->cpid = pid;
 		if (exec->next && exec->next->pipe == true)
 			sh_exec_piped_commands(exec->next, main);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 		main->cpid = -1;
+		if (status != 0)
+			sh_signal_status(status, pid);
 	}
 }
 
