@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:57 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/19 17:30:23 by eboris           ###   ########.fr       */
+/*   Updated: 2020/11/20 15:55:25 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void	sh_redirect_from_heredoc(t_redirect *here)
 		close(here_fd[1]);
 		close(here_fd[0]);
 		waitpid(here_pid, &status, 0);
-		if (!WIFEXITED(status))
-			sh_signal_status(status, here_pid);
+		sh_signal_status(status, here_pid);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:08:03 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/19 17:30:17 by eboris           ###   ########.fr       */
+/*   Updated: 2020/11/20 15:55:47 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	sh_std_in_out_pipe(t_exec *exec, int fd[2], int fd2[2], t_main *main)
 			sh_exec_piped_commands(exec->next, main);
 		waitpid(pid, &status, 0);
 		main->cpid = -1;
-		if (!WIFEXITED(status))
-			sh_signal_status(status, pid);
+		sh_signal_status(status, pid);
 	}
 }
 
@@ -59,8 +58,7 @@ void	sh_stdin_pipe(t_exec *exec, int fd[2], t_main *main)
 		main->cpid = pid;
 		waitpid(pid, &status, 0);
 		main->cpid = -1;
-		if (!WIFEXITED(status))
-			sh_signal_status(status, pid);
+		sh_signal_status(status, pid);
 	}
 }
 
@@ -83,8 +81,7 @@ void	sh_stdout_pipe(t_exec *exec, int fd[2], t_main *main)
 			sh_exec_piped_commands(exec->next, main);
 		waitpid(pid, &status, 0);
 		main->cpid = -1;
-		if (!WIFEXITED(status))
-			sh_signal_status(status, pid);
+		sh_signal_status(status, pid);
 	}
 }
 
