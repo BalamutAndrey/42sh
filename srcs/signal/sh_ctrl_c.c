@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_ctrl_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 18:16:34 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 14:44:36 by eboris           ###   ########.fr       */
+/*   Updated: 2020/11/29 12:57:42 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	sh_sig_ctrl_c_ks(t_main *g_main)
 	}
 	ft_putstr_fd(tgoto(tgetstr("do", NULL), 0, 5), g_main->fd);
 	if (g_main->prompt != NULL)
-		ft_strdel(&g_main->prompt);
+		sh_new_prompt(g_main);
 	if (g_main->ks_temp != NULL)
 		ft_strdel(&g_main->ks_temp);
 	ft_bzero(g_main->ks, MAX_KS_LEN);
@@ -49,4 +49,14 @@ void	sh_sig_ctrl_c_ks(t_main *g_main)
 	sh_cursor_math(g_main);
 	sh_reprint_ks(g_main);
 	g_main->hist_curr = g_main->hist_end;
+}
+
+void	sh_new_prompt(t_main *g_main)
+{
+	ft_strdel(&g_main->prompt);
+	g_main->prompt_len = 3;
+	if (g_main->user)
+		g_main->prompt_len = g_main->prompt_len + ft_strlen(g_main->user) + 1;
+	else
+		g_main->prompt_len = g_main->prompt_len + 8;
 }
