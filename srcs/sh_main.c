@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 15:58:27 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/04 16:53:12 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/04 16:56:15 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_main	*g_main;
 
+// Delete me after test! 
 void	temp_alias(t_main *main)
 {
 	t_alias *first;
