@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 17:27:09 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/20 15:55:00 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/04 18:00:19 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	sh_signal_set(void)
 {
 	signal(SIGWINCH, sh_sig_screen_resize);
 	signal(SIGINT, sh_sig_ctrl_c);
+	signal(SIGQUIT, sh_sig_ctrl_c);
 }
 
 void	sh_signal_status(int status, pid_t pid)

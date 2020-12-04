@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:14:01 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/04 16:37:44 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/04 17:05:00 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_alias	*sh_alias_new(t_main *main, char *str)
 	new->name = ft_strmbncpy(temp, i);
 	new->command = ft_strmancpy(temp, i + 1);
 	new->next = NULL;
+	main->alias_end->next = new;
+	main->alias_end = new;
 	return (new);
 }
 
