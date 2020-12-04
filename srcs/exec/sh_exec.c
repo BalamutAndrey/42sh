@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/20 15:38:08 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/04 17:50:24 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,20 @@ int16_t	sh_exec_prog(t_exec *exec, t_main *main, char *err_built)
 void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 {
 	pid_t	cpid;
-	int16_t	error;
-	int		redir_err;
+	int16_t	err;
+	int		r_err;
 	int		status;
 
-	redir_err = 0;
+	r_err = 0;
 	if (err_built || (sh_run_access(exec->argv) != 5))
 	{
 		cpid = fork();
 		if (cpid == 0)
 		{
 			if (exec->redir)
-				redir_err = sh_redirects_hub(exec, main);
-			if (redir_err >= 0 &&
-				((error = sh_exec_prog(exec, main, err_built)) != 0))
-				sh_exec_print_error(error);
+				r_err = sh_redirects_hub(exec, main);
+			if (r_err >= 0 && (err = sh_exec_prog(exec, main, err_built)) != 0)
+				sh_exec_print_error(err);
 		}
 		else
 		{
