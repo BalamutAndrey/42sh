@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   sh_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 15:58:27 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 18:41:25 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/04 16:53:12 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
 t_main	*g_main;
+
+void	temp_alias(t_main *main)
+{
+	t_alias *first;
+	t_alias *end;
+
+	first = sh_memalloc(sizeof(t_alias), main);
+	first->name = sh_strdup("ll", main);
+	first->command = sh_strdup("2>&1 ls -l -F", main);
+	
+	end = sh_memalloc(sizeof(t_alias), main);
+	end->name = sh_strdup("aa", main);
+	end->command = sh_strdup("2>&1 ls -l -a -F | wc -c", main);
+
+	first->next = end;
+	end->next = NULL;
+
+	main->alias = first;
+	main->alias_end = end;
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -27,6 +47,10 @@ int	main(int argc, char **argv, char **env)
 	sh_signal_set();
 	sh_copy_envp(main);
 	sh_path(main);
+
+	// FOR TEST ONLY !!!
+	temp_alias(main);
+
 	sh_readline(main);
 	sh_term_restore(main);
 	sh_remove_struct(&main);
