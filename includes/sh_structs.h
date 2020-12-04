@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_structs.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 18:49:36 by geliz            ###   ########.fr       */
+/*   Updated: 2020/11/29 15:59:16 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,12 @@ typedef struct			s_exec {
 	struct s_exec		*next;
 }						t_exec;
 
+typedef struct 			s_alias {
+	char				*name;
+	char				*command;
+	struct s_alias		*next;
+}						t_alias;
+
 typedef struct			s_main
 {
 	char				*term_name;
@@ -162,6 +168,8 @@ typedef struct			s_main
 	t_token				*token;
 	t_token				*token_curr;
 	t_token_free		*token_first;
+	t_alias				*alias;
+	t_alias				*alias_end;
 	t_node				*tree_first;
 	t_node				*tree_curr;
 	t_exec				*exec_first;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 16:19:26 by geliz            ###   ########.fr       */
+/*   Updated: 2020/11/29 16:10:00 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,22 @@ void	sh_builtin_setenv_change_env(t_exec *exec, t_main *main, char *tmp,
 char	*sh_builtin_unsetenv(t_exec *exec, t_main *main);
 void	sh_builtin_unsetenv_delete_one(t_main *main, char *tmp);
 void	sh_builtin_unsetenv_create_new(t_main *main, int pos, int j);
+
+/*
+** sh_alias.c
+*/
+char	*sh_alias(t_exec *exec, t_main *main);
+
+/*
+** sh_alias_print.c
+*/
+char	*sh_alias_print(t_main *main);
+char	*sh_alias_print_one(t_main *main, char *name);
+
+/*
+** sh_alias_arg.c 
+*/
+char	*sh_alias_arg(t_exec *exec, t_main *main);
+t_alias	*sh_alias_new(t_main *main, char *str);
 
 #endif

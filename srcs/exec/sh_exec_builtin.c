@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 15:16:13 by geliz            ###   ########.fr       */
+/*   Updated: 2020/11/29 14:41:50 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main)
 		sh_builtin_echo(main, exec);
 	else if (ft_strcmp(exec->argv[0], "exit") == 0)
 		sh_exit(main, 0);
+	else if (ft_strcmp(exec->argv[0], "alias") == 0)
+		finish = sh_alias(exec, main);
 	else if (ft_strcmp(exec->argv[0], "setenv") == 0)
 		finish = sh_builtin_setenv(exec, main);
 	else if (ft_strcmp(exec->argv[0], "unsetenv") == 0)
