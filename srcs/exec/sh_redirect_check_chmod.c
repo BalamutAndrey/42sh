@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 15:06:19 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/08 15:19:56 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/06 15:32:40 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	sh_redirect_error_file_check(char *str, t_redirect *new)
 	}
 	if (new->error == 0)
 		lstat(str, &buff);
-	if (new->error == 0 && !S_ISLNK(buff.st_mode) && !S_ISREG(buff.st_mode))
+	if (new->error == 0 && !S_ISLNK(buff.st_mode) && !S_ISREG(buff.st_mode) && !S_ISCHR(buff.st_mode))
 		new->error = -4;
 	if (new->error == 0 && S_ISLNK(buff.st_mode))
 		stat(str, &buff);

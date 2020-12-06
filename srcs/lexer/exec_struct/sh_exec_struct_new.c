@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_struct_new.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 15:38:39 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 15:39:21 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/06 17:35:43 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_exec	*sh_exec_struct_new(t_main *main)
 	t_exec	*new;
 
 	new = sh_memalloc(sizeof(t_exec), main);
-	new->cmd = NULL;
 	new->argv = NULL;
 	new->redir = NULL;
 	new->pipe = false;
@@ -26,6 +25,7 @@ t_exec	*sh_exec_struct_new(t_main *main)
 	new->envvar = NULL;
 	new->envvar_first = NULL;
 	new->envvar_curr = NULL;
+	new->vars = NULL;
 	new->next = NULL;
 	return (new);
 }

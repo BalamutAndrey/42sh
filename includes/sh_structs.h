@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_structs.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/29 15:59:16 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/06 17:46:57 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum			e_type {
 	SEPARATOR,
 
 	WORD,
+	ASSIGNMENT_WORD,
 	NEWLINE,
 	IO_NUMBER,
 	LESS,
@@ -115,7 +116,6 @@ typedef struct			s_redirect {
 }						t_redirect;
 
 typedef struct			s_exec {
-	char				*cmd;
 	char				**argv;
 	t_redirect			*redir;
 	bool				pipe;
@@ -123,6 +123,7 @@ typedef struct			s_exec {
 	t_envvar			*envvar;
 	t_envvar			*envvar_first;
 	t_envvar			*envvar_curr;
+	char				**vars;
 	struct s_exec		*next;
 }						t_exec;
 
@@ -131,6 +132,13 @@ typedef struct 			s_alias {
 	char				*command;
 	struct s_alias		*next;
 }						t_alias;
+
+typedef struct			s_vars {
+	char				*name;
+	char				*value;
+	int					env;
+	struct s_vars		*next;
+}						t_vars;
 
 typedef struct			s_main
 {
@@ -176,6 +184,7 @@ typedef struct			s_main
 	t_exec				*exec_curr;
 	int32_t				cpid;
 	t_fds				*opfds;
+	t_vars				*vars;
 }						t_main;
 
 /*

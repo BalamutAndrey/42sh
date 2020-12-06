@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_structs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 11:47:56 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/29 15:17:59 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/06 17:40:14 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	sh_struct_set_default_values(t_main *new)
 	new->opfds = NULL;
 	new->cpid = -1;
 	new->alias = NULL;
+	new->vars = NULL;
 }
 
 t_main	*sh_add_main_struct(char **env)

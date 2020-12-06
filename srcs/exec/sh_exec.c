@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/04 17:50:24 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/06 17:47:53 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 
 	err_built = NULL;
 	redir_err = 0;
+//	sh_check_variables(exec, main);
+// 	БУДЕТ РАБОТАТЬ ПОСЛЕ ПРАВОК В ДЕРЕВЕ
+//	ТОГДА ЖЕ ВКЛЮЧИТЬ ФАЙЛ sh_exec_check_vars.c в Make и во все нужные .h
 	if (exec->pipe == true || (exec->next && exec->next->pipe == true))
 	{
 		if (exec->redir)

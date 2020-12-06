@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_remove_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:14:16 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 14:44:15 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/06 17:37:06 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	sh_remove_exec_exec(t_exec *temp)
 {
 	if (temp)
 	{
-		if (temp->cmd != NULL)
-			ft_strdel(&temp->cmd);
 		sh_remove_argv(temp->argv);
 		temp->argv = NULL;
+		sh_remove_argv(temp->vars);
+		temp->vars = NULL;
 		sh_remove_redirect(temp->redir);
 		temp->redir = NULL;
 		sh_remove_envvar(temp->envvar_first);
