@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/06 17:47:53 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/09 17:44:14 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,15 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 
 	err_built = NULL;
 	redir_err = 0;
-//	sh_check_variables(exec, main);
+	sh_check_variables(exec, main);
 // 	БУДЕТ РАБОТАТЬ ПОСЛЕ ПРАВОК В ДЕРЕВЕ
 //	ТОГДА ЖЕ ВКЛЮЧИТЬ ФАЙЛ sh_exec_check_vars.c в Make и во все нужные .h
+//
+// eboris:
+//	Включил, добавил.
+//	В main->vars переменные хранятся в обратном порядке (первая - это последняя)
+//	В main->vars имя меременной включает знак равно. (main->vars->name = "a=")
+//	Нет ретурна sh_add_var_to_struct.
 	if (exec->pipe == true || (exec->next && exec->next->pipe == true))
 	{
 		if (exec->redir)

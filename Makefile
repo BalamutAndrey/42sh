@@ -127,6 +127,7 @@ ES_NAME=sh_exec_struct_argv.c \
 		sh_exec_struct_create.c \
 		sh_exec_struct_new.c \
 		sh_exec_struct_redirect.c \
+		sh_exec_struct_assigment_word.c \
 		sh_exec_struct_envvar.c
 EX_NAME=sh_access_file.c \
 		sh_envvar_func.c \
@@ -137,6 +138,7 @@ EX_NAME=sh_access_file.c \
 		sh_exec_pipes.c \
 		sh_path_add.c \
 		sh_redirect_check_chmod.c \
+		sh_exec_check_vars.c \
 		sh_redirects.c \
 		sh_redirects_hub.c \
 		sh_redirects_io.c

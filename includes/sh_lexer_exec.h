@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_lexer_exec.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:23:28 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 16:20:26 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/09 17:23:45 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ u_int64_t	sh_exec_struct_write_argv_num(t_main *main);
 void		sh_exec_struct_write_argv(t_main *main, t_exec *new);
 void		sh_exec_struct_write_argv_add(t_node *temp, t_exec *new,
 			char **argv, u_int64_t *i);
+
+/*
+** sh_exec_struct_assigment_word.c
+*/
+void		sh_exec_struct_write_assigmentword(t_main *main);
+u_int64_t	sh_exec_struct_write_assigmentword_num(t_main *main);
+void		sh_exec_struct_write_assigmentword_add(t_node *temp,
+	char **vars, u_int64_t *i);
 
 /*
 ** sh_exec_struct_redirect.c

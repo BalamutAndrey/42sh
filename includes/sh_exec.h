@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:00 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/07 00:20:57 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/09 17:38:50 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ void	sh_redirect_error_dir_check(char *dir, t_redirect *new);
 void	sh_redirect_error_file_check(char *str, t_redirect *new);
 char	*sh_redirect_error_find_dir(t_main *main, t_redirect *new);
 /*
+** sh_exec_check_vars.c
+*/
+t_vars	*sh_add_var_to_struct(t_main *main, char *str);
+void	sh_get_vars_from_env(t_main *main);
+void	sh_check_variables(t_exec *exec, t_main *main);
+/*
 ** sh_exec_pipes.c
 */
 void	sh_exec_piped_commands(t_exec *exec, t_main *main);
@@ -65,7 +71,7 @@ bool	sh_is_builtin(char *str);
 bool	sh_is_builtin_nofork(char *str);
 
 /*
-** sh_access_file.c
+** sh_path_add.c
 */
 void	sh_path_add(t_main *main, t_exec *temp);
 void	sh_run_write_string_point(t_main *main, t_exec *temp);
