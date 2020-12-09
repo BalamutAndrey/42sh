@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_lexer_tree.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:20:14 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 17:12:43 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/09 16:31:51 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,8 +445,14 @@ t_node	*sh_cmdword_word(t_main *main);
 t_node	*sh_cmdprefix(t_main *main);
 t_node	*sh_cmdprefix_ioredirect(t_main *main);
 t_node	*sh_cmdprefix_cmdprefix_ioredirect(t_main *main);
+
+/*
+** sh_cmd_prefix_assigment_word.c
+*/
 t_node	*sh_cmdprefix_assignment_word(t_main *main);
 t_node	*sh_cmdprefix_cmdprefix_assignment_word(t_main *main);
+t_node	*sh_cmdprefix_assignment_word_while
+	(t_main *main, t_node *first, t_node *curr, t_node *temp);
 
 /*
 ** sh_cmd_suffix.c

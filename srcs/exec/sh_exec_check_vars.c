@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_check_vars.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:31:14 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/06 18:06:42 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/09 15:58:47 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_vars	*sh_add_var_to_struct(t_main *main, char *str)
 	new->env = 1;
 	new->next = main->vars;
 	main->vars = new;
+	// Ошибка. Где ретурн? Добавил пока NULL
+	return (NULL);
 }
 
 void	sh_get_vars_from_env(t_main *main)

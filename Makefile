@@ -79,6 +79,7 @@ TREE_NAME=sh_and_or.c \
 		sh_case_list_ns.c \
 		sh_cmd_name.c \
 		sh_cmd_prefix.c \
+		sh_cmd_prefix_assigment_word.c \
 		sh_cmd_suffix.c \
 		sh_cmd_word.c \
 		sh_command.c \
