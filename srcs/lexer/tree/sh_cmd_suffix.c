@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_cmd_suffix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:29:27 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 17:36:47 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/10 16:53:35 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_node	*sh_cmdsuffix(t_main *main)
 	t_node	*temp;
 
 	temp = NULL;
-	if ((main->token_curr == NULL) || (main->token_curr->type == SEPARATOR) ||
+	if ((main->token_curr == NULL) || (main->token_curr->type == SEPARATOR) || (main->token_curr->type == AND_IF) ||
 	(main->token_curr->type == PIPELINE) || (main->token_curr->type == NEWLINE))
 		return (NULL);
 	if ((sh_is_a_redirect(main->token_curr) == false) &&
@@ -51,7 +51,7 @@ t_node	*sh_cmdsuffix(t_main *main)
 t_node	*sh_cmdsuffix_while
 	(t_main *main, t_node *first, t_node *curr, t_node *temp)
 {
-	while (main->token_curr != NULL && main->token_curr->type != SEPARATOR &&
+	while (main->token_curr != NULL && main->token_curr->type != SEPARATOR && main->token_curr->type != AND_IF &&
 	(main->token_curr->type != PIPELINE) && (main->token_curr->type != NEWLINE))
 	{
 		if ((sh_is_a_redirect(main->token_curr) == false) &&

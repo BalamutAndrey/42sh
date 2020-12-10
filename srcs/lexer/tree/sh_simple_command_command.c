@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_simple_command_command.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 15:03:57 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 18:40:14 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/10 16:47:09 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ t_node	*sh_simplecommand_cmdname(t_main *main)
 	if ((main->token_curr->next == NULL) ||
 		(main->token_curr->next->type == SEPARATOR) ||
 		(main->token_curr->next->type == PIPELINE) ||
+		(main->token_curr->next->type == AND_IF) ||
 		(main->token_curr->next->type == NEWLINE))
 	{
 		return (temp);

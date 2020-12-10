@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_simple_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 15:02:26 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/04 17:27:23 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/10 16:38:58 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_node	*sh_simplecommand(t_main *main)
 		if ((main->token_curr->next != NULL) &&
 		(main->token_curr->next->type != SEPARATOR) &&
 		(main->token_curr->next->type != PIPELINE) &&
+		(main->token_curr->next->type != AND_IF) &&
 		(main->token_curr->next->type != NEWLINE))
 		{
 			sh_lexer_del_node(&temp);

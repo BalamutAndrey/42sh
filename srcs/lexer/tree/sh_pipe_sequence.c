@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_pipe_sequence.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:04:07 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 16:31:59 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/10 16:37:14 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_node	*sh_pipesequence(t_main *main)
 	{
 		if ((main->token_curr != NULL) && (main->token_curr->type == NEWLINE))
 			main->token_curr = main->token_curr->next;
-		if ((main->token_curr == NULL) || (main->token_curr->type == SEPARATOR))
+		if ((main->token_curr == NULL) || (main->token_curr->type == SEPARATOR) || (main->token_curr->type == AND_IF))
 			return (temp);
 		else if (temp != NULL)
 		{

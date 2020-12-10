@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_struct_new.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 15:38:39 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/06 17:35:43 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/10 17:52:54 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_exec	*sh_exec_struct_new(t_main *main)
 	new->argv = NULL;
 	new->redir = NULL;
 	new->pipe = false;
+	new->andif = false;
 	new->pipefd[0] = STDIN_FILENO;
 	new->pipefd[1] = STDOUT_FILENO;
 	new->envvar = NULL;
