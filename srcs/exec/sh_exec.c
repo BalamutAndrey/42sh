@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/12 18:10:43 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/12 18:30:32 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ void	sh_exec(t_main *main, t_exec *exec)
 {
 	while (exec)
 	{
-		if (!exec->vars)
-			ft_printf("NO VARS!\n");
 		sh_check_variables(exec, main);
 		tcsetattr(main->fd, TCSANOW, &main->t_start);
 		if (exec->next && exec->next->pipe == true)

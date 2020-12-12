@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 14:51:20 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/09 17:19:29 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/12 18:23:38 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void	sh_exec_struct_write(t_main *main, bool pipe)
 	main->exec_curr = main->exec_curr->next;
 	sh_exec_struct_write_argv(main, new);
 	sh_exec_struct_write_assigmentword(main);
+	if (!new->vars)
+		ft_printf("!!!\n");
 	sh_exec_struct_redirect(main);
 	new->pipe = pipe;
 	main->tree_curr = node;
