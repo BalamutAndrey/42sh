@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/09 17:44:14 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/12 18:10:43 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,6 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 
 	err_built = NULL;
 	redir_err = 0;
-	sh_check_variables(exec, main);
-// 	БУДЕТ РАБОТАТЬ ПОСЛЕ ПРАВОК В ДЕРЕВЕ
-//	ТОГДА ЖЕ ВКЛЮЧИТЬ ФАЙЛ sh_exec_check_vars.c в Make и во все нужные .h
-//
-// eboris:
-//	Включил, добавил.
-//	В main->vars переменные хранятся в обратном порядке (первая - это последняя)
-//	В main->vars имя меременной включает знак равно. (main->vars->name = "a=")
-//	Нет ретурна sh_add_var_to_struct.
 	if (exec->pipe == true || (exec->next && exec->next->pipe == true))
 	{
 		if (exec->redir)
@@ -113,6 +104,9 @@ void	sh_exec(t_main *main, t_exec *exec)
 {
 	while (exec)
 	{
+		if (!exec->vars)
+			ft_printf("NO VARS!\n");
+		sh_check_variables(exec, main);
 		tcsetattr(main->fd, TCSANOW, &main->t_start);
 		if (exec->next && exec->next->pipe == true)
 		{

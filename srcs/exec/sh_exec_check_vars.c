@@ -3,20 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_check_vars.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:31:14 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/09 15:58:47 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/12 18:10:25 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
-t_vars	*sh_add_var_to_struct(t_main *main, char *str)
+int		sh_check_exist_var(t_main *main, char *str)
+{
+	char	*name;
+	int		i;
+	t_vars	*tmp;
+
+	i = 0;
+	tmp = main->vars;
+	while (str[i] != '=')
+		i++;
+	name = sh_strsub(str, 0, (i + 1), main);
+	while (tmp)
+	{
+		if (ft_strcmp(name, tmp->name) == 0)
+		{
+			ft_strdel(&tmp->value);
+			tmp->value = sh_strdup((ft_strchr(str, '=') + 1), main);
+			ft_strdel(&name);
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	ft_strdel(&name);
+	return (0);
+}
+
+void	sh_add_var_to_struct(t_main *main, char *str)
 {
 	t_vars	*new;
 	int		i;
 
+	if (sh_check_exist_var(main, str) == 1)
+		return ;
 	new = sh_memalloc(sizeof(t_vars), main);
 	i = 0;
 	while (str[i] != '=')
@@ -26,8 +54,6 @@ t_vars	*sh_add_var_to_struct(t_main *main, char *str)
 	new->env = 1;
 	new->next = main->vars;
 	main->vars = new;
-	// Ошибка. Где ретурн? Добавил пока NULL
-	return (NULL);
 }
 
 void	sh_get_vars_from_env(t_main *main)

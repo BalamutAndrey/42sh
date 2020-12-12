@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:00 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/09 17:38:50 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/12 17:49:49 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ char	*sh_redirect_error_find_dir(t_main *main, t_redirect *new);
 /*
 ** sh_exec_check_vars.c
 */
-t_vars	*sh_add_var_to_struct(t_main *main, char *str);
+void	sh_add_var_to_struct(t_main *main, char *str);
 void	sh_get_vars_from_env(t_main *main);
 void	sh_check_variables(t_exec *exec, t_main *main);
+int		sh_check_exist_var(t_main *main, char *str);
 /*
 ** sh_exec_pipes.c
 */
@@ -80,7 +81,8 @@ void	sh_find_path(t_main *main, t_exec *exec);
 /*
 ** sh_envvar_in_exec.c
 */
-void	sh_change_envvars_in_exec(t_main *main, t_exec *exec);
+char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar);
+void	sh_change_envvars_in_exec(t_main *main, t_exec *exec); //возможно нужно будет удалить!
 void	sh_envvar_change_argv(t_envvar *envvar, t_exec *exec, char *new_str);
 char	*sh_change_envvars_in_exec_struct(t_main *main, t_envvar *envvar);
 /*
