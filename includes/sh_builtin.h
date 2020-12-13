@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/29 16:10:00 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/13 17:33:07 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,20 @@ char	*sh_alias_print_one(t_main *main, char *name);
 */
 char	*sh_alias_arg(t_exec *exec, t_main *main);
 t_alias	*sh_alias_new(t_main *main, char *str);
+
+/*
+** sh_builtin_set.c 
+*/
+void	sh_builtin_set(t_main *main);
+
+/*
+** sh_builtin_unset.c 
+*/
+void	sh_builtin_unset(t_exec *exec, t_main *main);
+
+/*
+** sh_builtin_export.c 
+*/
+void	sh_builtin_export(t_exec *exec, t_main *main);
 
 #endif

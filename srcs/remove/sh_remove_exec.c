@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 18:14:16 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/06 17:37:06 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/13 15:21:16 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	sh_remove_exec_exec(t_exec *temp)
 		temp->redir = NULL;
 		sh_remove_envvar(temp->envvar_first);
 		temp->envvar = NULL;
+		sh_remove_argv(temp->vars);
+		temp->vars = NULL;
 		temp->envvar_curr = NULL;
 		free(temp);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/29 14:41:50 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/13 17:46:36 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,21 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main)
 	else if (ft_strcmp(exec->argv[0], "setenv") == 0)
 		finish = sh_builtin_setenv(exec, main);
 	else if (ft_strcmp(exec->argv[0], "unsetenv") == 0)
+	{
 		finish = sh_builtin_unsetenv(exec, main);
+		sh_builtin_unset(exec, main);
+	}
 	else if (ft_strcmp(exec->argv[0], "env") == 0)
 		sh_builtin_env(main);
+	else if (ft_strcmp(exec->argv[0], "set") == 0)
+		sh_builtin_set(main);
+	else if (ft_strcmp(exec->argv[0], "unset") == 0)
+	{
+		sh_builtin_unset(exec, main);
+		finish = sh_builtin_unsetenv(exec, main);
+		ft_strdel(&finish);
+	}
+	else if (ft_strcmp(exec->argv[0], "export") == 0)
+		sh_builtin_export(exec, main);
 	return (finish);
 }

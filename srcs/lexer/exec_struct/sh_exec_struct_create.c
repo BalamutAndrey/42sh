@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_struct_create.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 14:51:20 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/12 18:23:38 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/13 15:25:06 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ void	sh_exec_struct_write(t_main *main, bool pipe)
 	main->exec_curr = main->exec_curr->next;
 	sh_exec_struct_write_argv(main, new);
 	sh_exec_struct_write_assigmentword(main);
-	if (!new->vars)
-		ft_printf("!!!\n");
 	sh_exec_struct_redirect(main);
 	new->pipe = pipe;
 	main->tree_curr = node;

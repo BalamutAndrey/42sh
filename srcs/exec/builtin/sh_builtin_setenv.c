@@ -6,11 +6,37 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 17:38:40 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/08 15:09:50 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/13 18:24:46 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
+
+void	sh_builtin_change_vars_after_setenv(t_main *main, char *str, int new)
+{
+	t_vars	*tmp;
+	int		i;
+
+	if (new == 1)
+	{
+		sh_add_var_to_struct(main, str, 1);
+		return ;
+	}
+	tmp = main->vars;
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, str, (i + 1)) == 0)
+		{
+			ft_strdel(&tmp->value);
+			tmp->value = sh_strdup(&str[i + 2], main);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
 
 void	sh_builtin_setenv_change_env(t_exec *exec, t_main *main, char *tmp,
 		int i)
@@ -18,6 +44,7 @@ void	sh_builtin_setenv_change_env(t_exec *exec, t_main *main, char *tmp,
 	tmp = sh_strjoin_arg(main, "%f %s", tmp, exec->argv[2]);
 	ft_strdel(&main->envp_curr[i]);
 	main->envp_curr[i] = tmp;
+	sh_builtin_change_vars_after_setenv(main, tmp, 0);
 	if (ft_strncmp(main->envp_curr[i], "PATH=", 5) == 0)
 		sh_path(main);
 }
@@ -30,6 +57,7 @@ void	sh_builtin_setenv_new_env(t_exec *exec, t_main *main, char *tmp, int i)
 	new_env[i + 1] = NULL;
 	tmp = sh_strjoin_arg(main, "%f %s", tmp, exec->argv[2]);
 	new_env[i] = tmp;
+	sh_builtin_change_vars_after_setenv(main, tmp, 1);
 	while (--i != -1)
 	{
 		new_env[i] = sh_strdup(main->envp_curr[i], main);

@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:48:28 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/12 18:05:41 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/13 18:33:12 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*sh_change_envvars_in_exec_struct(t_main *main, t_envvar *envvar)
 	before_var = NULL;
 	after_var = NULL;
 	env_cont = sh_find_envvar_in_vars(main, envvar);
-//	env_cont = sh_find_envvar_in_env(main->envp_curr, envvar, main);
 	envvar->type = ft_strlen(env_cont) - (envvar->end - envvar->start);
 	if (envvar->start > 0)
 		before_var = sh_strsub(envvar->str, 0, envvar->start, main);
@@ -56,8 +55,6 @@ void	sh_change_envvars_in_exec(t_main *main, t_exec *exec)
 
 	tmp = NULL;
 	shift = 0;
-	if (!main->vars)
-		sh_get_vars_from_env(main); //пока что тут, надо еще подумать
 	while (exec->envvar)
 	{
 		new_str = sh_change_envvars_in_exec_struct(main, exec->envvar);

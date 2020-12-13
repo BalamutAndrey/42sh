@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:57:04 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 16:33:30 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/13 15:23:41 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	sh_remove_fds(t_main *main);
 ** sh_remove_envvar.c
 */
 void	sh_remove_envvar(t_envvar *envvar);
+void	sh_remove_vars(t_main *main);
 
 #endif

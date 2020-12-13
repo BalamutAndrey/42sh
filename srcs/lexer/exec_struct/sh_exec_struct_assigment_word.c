@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_struct_assigment_word.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 16:41:19 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/12 18:30:20 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/13 15:14:15 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void		sh_exec_struct_write_assigmentword(t_main *main)
 
 	temp = main->tree_curr;
 	n = sh_exec_struct_write_assigmentword_num(main);
-	ft_printf("n = %i\n", n);
 	i = 0;
 	if (n != 0)
 	{

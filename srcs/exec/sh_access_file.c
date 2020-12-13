@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_access_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 15:35:21 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/29 14:35:17 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/13 17:32:13 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ bool	sh_is_builtin(char *str)
 		(ft_strcmp(str, "env") == 0) ||
 		(ft_strcmp(str, "setenv") == 0) ||
 		(ft_strcmp(str, "unsetenv") == 0) ||
-		(ft_strcmp(str, "pwd") == 0))
+		(ft_strcmp(str, "pwd") == 0) ||
+		(ft_strcmp(str, "set") == 0) ||
+		(ft_strcmp(str, "unset") == 0) ||
+		(ft_strcmp(str, "export") == 0))
 	{
 		return (true);
 	}
@@ -61,7 +64,9 @@ bool	sh_is_builtin_nofork(char *str)
 		(ft_strcmp(str, "exit") == 0) ||
 		(ft_strcmp(str, "alias") == 0) ||
 		(ft_strcmp(str, "setenv") == 0) ||
-		(ft_strcmp(str, "unsetenv") == 0))
+		(ft_strcmp(str, "unsetenv") == 0) ||
+		(ft_strcmp(str, "unset") == 0) ||
+		(ft_strcmp(str, "export") == 0))
 	{
 		return (true);
 	}

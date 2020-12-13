@@ -1,53 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_remove_envvar.c                                 :+:      :+:    :+:   */
+/*   sh_builtin_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 16:48:13 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/13 15:24:21 by geliz            ###   ########.fr       */
+/*   Created: 2020/12/13 17:20:15 by geliz             #+#    #+#             */
+/*   Updated: 2020/12/13 18:24:00 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
-void	sh_remove_vars(t_main *main)
+void	sh_builtin_unset_var(t_main *main, char *str)
 {
 	t_vars	*tmp;
-	t_vars	*vars;
+	t_vars	*prev;
 
-	vars = main->vars;
-	if (vars != NULL)
+	prev = NULL;
+	tmp = main->vars;
+	while (tmp)
 	{
-		tmp = vars;
-		while (tmp)
+		if (ft_strncmp(tmp->name, str, ft_strlen(str)) == 0)
 		{
-			vars = tmp->next;
+			if (!prev)
+				main->vars = tmp->next;
+			else
+				prev->next = tmp->next;
 			ft_strdel(&tmp->name);
 			ft_strdel(&tmp->value);
 			tmp->next = NULL;
 			free(tmp);
-			tmp = vars;
+			tmp = NULL;
+			return ;
 		}
+		prev = tmp;
+		tmp = tmp->next;
 	}
-	main->vars = NULL;
 }
 
-void	sh_remove_envvar(t_envvar *envvar)
+void	sh_builtin_unset(t_exec *exec, t_main *main)
 {
-	t_envvar	*temp;
+	int		i;
 
-	if (envvar != NULL)
+	i = 1;
+	while (exec->argv[i])
 	{
-		temp = envvar;
-		while (temp != NULL)
-		{
-			envvar = temp->next;
-			temp->str = NULL;
-			temp->next = NULL;
-			free(temp);
-			temp = envvar;
-		}
+		sh_builtin_unset_var(main, exec->argv[i]);
+		i++;
 	}
 }
