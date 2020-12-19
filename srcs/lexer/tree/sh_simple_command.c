@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 15:02:26 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/12 16:59:22 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/19 10:48:50 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_node	*sh_simplecommand(t_main *main)
 		(main->token_curr->next->type != OR_IF) &&
 		(main->token_curr->next->type != NEWLINE))
 		{
-			sh_lexer_del_node(&temp);
+			sh_lexer_del_all_node(&temp);
 			return (NULL);
 		}
 		main->token_curr = main->token_curr->next;
