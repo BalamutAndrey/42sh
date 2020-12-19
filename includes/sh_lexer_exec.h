@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:23:28 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/09 17:23:45 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/19 09:39:38 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 ** sh_exec_struct_create.c
 */
 void		sh_exec_struct_create(t_main *main);
-void		sh_exec_struct_go(t_main *main, bool pipe);
-bool		sh_exec_struct_go_check(t_main *main, t_node *temp, bool pipe);
-void		sh_exec_struct_go_check_else(t_main *main, t_node *temp, bool pipe);
-void		sh_exec_struct_write(t_main *main, bool pipe);
+void		sh_exec_struct_go(t_main *main, int8_t extsep);
+bool		sh_exec_struct_go_check(t_main *main, t_node *temp, int8_t extsep);
+void		sh_exec_struct_go_check_else(t_main *main, t_node *temp, int8_t extsep);
+void		sh_exec_struct_write(t_main *main, int8_t extsep);
 
 /*
 ** sh_exec_struct_new.c

@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/10 17:47:48 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/19 09:41:52 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct			s_exec {
 	t_redirect			*redir;
 	bool				pipe;
 	bool				andif;
+	bool				orif;
 	int					pipefd[2];
 	t_envvar			*envvar;
 	t_envvar			*envvar_first;
