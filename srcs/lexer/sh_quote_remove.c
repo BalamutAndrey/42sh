@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:00:27 by geliz             #+#    #+#             */
-/*   Updated: 2020/10/31 17:29:41 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/19 15:56:10 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	sh_find_and_remove_quotes(t_main *main, t_token *token)
 		sh_is_protected(token->content, i) == 0)
 			i = sh_squotes_remove(token, i, main);
 		else if (token->content[i] == '$' &&
-		sh_is_protected(token->content, i) == 0
-		&& ft_isalpha(token->content[i + 1]) == 1)
+		sh_is_protected(token->content, i) == 0)
 			i = sh_add_envvar(1, i, main, token);
 		else if (token->content[i] == '\\')
 		{

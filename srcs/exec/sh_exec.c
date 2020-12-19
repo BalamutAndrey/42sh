@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/12 18:30:32 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/19 15:13:12 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ void	sh_exec(t_main *main, t_exec *exec)
 {
 	while (exec)
 	{
-		sh_check_variables(exec, main);
+		if (!main->vars)
+			sh_get_vars_from_env(main);
+//		sh_check_variables(exec, main);
 		tcsetattr(main->fd, TCSANOW, &main->t_start);
 		if (exec->next && exec->next->pipe == true)
 		{
@@ -115,6 +117,8 @@ void	sh_exec(t_main *main, t_exec *exec)
 		}
 		else
 		{
+			if (!exec->argv)
+				sh_check_variables(exec, main);
 			sh_change_envvars_in_exec(main, exec);
 			sh_standart_exec(exec, main);
 			exec = exec->next;

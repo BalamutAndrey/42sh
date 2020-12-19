@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:48:25 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/13 18:30:33 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/19 15:59:26 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ char	*sh_get_envvar_from_str(t_envvar *envvar, t_main *main)
 	if (envvar->type == 0)
 	{
 		var = sh_strdup("HOME=", main);
+		return (var);
+	}
+	if (envvar->type == 2)
+	{
+		len = envvar->end - envvar->start - 2;
+		var = sh_strsub(envvar->str, envvar->start + 2, len - 1, main);
+		var = sh_strjoin_arg(main, "%f %s", var, "=");
 		return (var);
 	}
 	len = envvar->end - envvar->start;

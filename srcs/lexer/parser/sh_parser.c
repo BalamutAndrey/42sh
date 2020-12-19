@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:02:16 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/06 23:49:42 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/19 16:10:34 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,27 @@ int		sh_is_str_empty(char *str)
 	return (1);
 }
 
+void	sh_check_fbraces(t_main *main)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (main->ks[i])
+	{
+		if (main->ks[i] == '{' && sh_is_protected(main->ks, i) == 0)
+			count++;
+		if (main->ks[i] == '}' && sh_is_protected(main->ks, i) == 0 && count > 0)
+			count--;
+		i++;
+	}
+	if (count > 0)
+	{
+		main->prompt = sh_strdup("fquotes", main);
+	}
+}
+
 void	sh_parser(t_main *main)
 {
 	int		empty;
@@ -70,10 +91,12 @@ void	sh_parser(t_main *main)
 		sh_check_slash(main);
 	if (!main->prompt && !main->heredoc)
 		sh_check_pipe(main);
+	if (!main->prompt && !main->heredoc)
+		sh_check_fbraces(main);
 	if (!main->prompt || !ft_strcmp(main->prompt, "Heredoc"))
 	{
 		if ((here_err = sh_check_heredoc(main)) == -2)
-			ft_fprintf(2, "Heredoc error no here_end token\n");
+			ft_fprintf(STDOUT_FILENO, "Heredoc error no here_end token\n");
 	}
 	if (!main->prompt && empty == 0 && here_err != -2)
 	{
