@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:46:32 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/20 17:03:20 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/20 18:56:52 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,26 @@ int		sh_dquotes_remove(t_token *token, int i, t_main *main)
 	int		tmp;
 
 	tmp = i;
-	ft_printf("tok cont = %s!\n", token->content);
-
 	sh_remove_char(i, token, main);
-	ft_printf("tok cont = %s!\n", token->content);
-	while (token->content[i] != '\"' || sh_is_protected(token->content, i) == 1)
+	while (token->content[i] != '\0')
+	{
+		if (token->content[i] == '\\' &&
+			(token->content[i + 1] == '\"' || token->content[i + 1] == '$') &&
+			sh_is_protected(token->content, i) == 0)
+		{
+			sh_remove_char(i, token, main);
+			i++;
+		}
+		else if (token->content[i] == '$' &&
+			sh_is_protected(token->content, i) == 0 &&
+			(ft_isalpha(token->content[i + 1]) == 1 || token->content[i + 1] == '{'))
+			i = sh_add_envvar(1, i, main, token);
+		else if (token->content[i] == '\"' && sh_is_protected(token->content, i) == 0)
+			break ;
+		else
+			i++;
+	}
+/*	while (token->content[i] != '\"' || sh_is_protected(token->content, i) == 1)
 	{
 		if (token->content[i] == '\\' &&
 			(token->content[i + 1] == '\"' || token->content[i + 1] == '$') &&
@@ -50,7 +65,7 @@ int		sh_dquotes_remove(t_token *token, int i, t_main *main)
 			i = sh_add_envvar(1, i, main, token);
 		else
 			i++;
-	}
+	}*/
 	sh_remove_char(i, token, main);
 	i = sh_dslashes_remove(tmp, i, token, main);
 	return (i);

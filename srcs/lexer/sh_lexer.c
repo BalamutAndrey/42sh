@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:13:46 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/20 17:34:45 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/20 18:15:43 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,10 @@ int		sh_find_end_of_token(int i, char *str)
 	while (str[i] != '\0' && str[i] != '\n' &&
 		!sh_is_whitespace_or_tab(str[i]) && !sh_is_operator(&str[i]))
 	{
-/*		if (str[i] == '\\')
-		{
-			ft_printf("i = %i\n", i);
-			i++;
-		}*/
-		if (str[i] == '\'' && (i == 0 || sh_is_protected(str, i - 1) == 0))
+		if (str[i] == '\'' && (i == 0 || sh_is_protected(str, i) == 0))
 			i = sh_find_closing_single_quotes(i, str);
-		else if (str[i] == '"' && (i == 0 || sh_is_protected(str, i - 1) == 0))
-		{
-			ft_printf("i = %i\n", i);
+		else if (str[i] == '"' && (i == 0 || sh_is_protected(str, i) == 0))
 			i = sh_find_closing_double_quotes(i, str);
-			ft_printf("after_i = %i\n", i);
-		}
 		else if (str[i] != '\0')
 			i++;
 	}
