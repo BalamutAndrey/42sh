@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:00:27 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/19 15:56:10 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/20 17:05:12 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	sh_quote_remove(t_main *main, t_token *token)
 {
 	while (token)
 	{
+	ft_printf("TOK!! cont = %s! TOK type = %i\n", token->content, token->type);
+
 		if (token->type == DLESS && token->next && token->next->type == WORD)
 		{
 			sh_find_envvar(token->next, main);

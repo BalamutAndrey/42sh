@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:02:16 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/19 16:10:34 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/20 14:35:47 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		sh_is_str_empty(char *str)
 	return (1);
 }
 
-void	sh_check_fbraces(t_main *main)
+int		sh_check_fbraces(t_main *main)
 {
 	int		i;
 	int		count;
@@ -75,14 +75,18 @@ void	sh_check_fbraces(t_main *main)
 	}
 	if (count > 0)
 	{
-		main->prompt = sh_strdup("fquotes", main);
+		ft_fprintf(STDERR_FILENO, "42sh: Bad substitution\n");
+		return (1);
+//		main->prompt = sh_strdup("fquotes", main);
 	}
+	return (0);
 }
 
 void	sh_parser(t_main *main)
 {
 	int		empty;
 	int		here_err;
+	int		fbrace_err;
 
 	empty = sh_is_str_empty(main->ks);
 	if (!main->prompt && !main->heredoc)
@@ -92,13 +96,13 @@ void	sh_parser(t_main *main)
 	if (!main->prompt && !main->heredoc)
 		sh_check_pipe(main);
 	if (!main->prompt && !main->heredoc)
-		sh_check_fbraces(main);
+		fbrace_err = sh_check_fbraces(main);
 	if (!main->prompt || !ft_strcmp(main->prompt, "Heredoc"))
 	{
 		if ((here_err = sh_check_heredoc(main)) == -2)
 			ft_fprintf(STDOUT_FILENO, "Heredoc error no here_end token\n");
 	}
-	if (!main->prompt && empty == 0 && here_err != -2)
+	if (!main->prompt && empty == 0 && here_err != -2 && fbrace_err != 1)
 	{
 		sh_lexer(main);
 		sh_lexer_tree_new(main);

@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:46:32 by geliz             #+#    #+#             */
-/*   Updated: 2020/10/25 16:03:02 by geliz            ###   ########.fr       */
+/*   Updated: 2020/12/20 17:03:20 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int		sh_dquotes_remove(t_token *token, int i, t_main *main)
 	int		tmp;
 
 	tmp = i;
+	ft_printf("tok cont = %s!\n", token->content);
+
 	sh_remove_char(i, token, main);
+	ft_printf("tok cont = %s!\n", token->content);
 	while (token->content[i] != '\"' || sh_is_protected(token->content, i) == 1)
 	{
 		if (token->content[i] == '\\' &&
