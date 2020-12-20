@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 16:30:35 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/09 16:33:34 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/20 16:13:52 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_node	*sh_cmdprefix_cmdprefix_assignment_word(t_main *main)
 t_node	*sh_cmdprefix_assignment_word_while
 	(t_main *main, t_node *first, t_node *curr, t_node *temp)
 {
-	while (main->token_curr != NULL && 
+	while (main->token_curr != NULL &&
 		(((sh_is_a_redirect(main->token_curr) == true)) ||
 		(main->token_curr->type == ASSIGNMENT_WORD)))
 	{

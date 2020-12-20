@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:29:27 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/12 16:58:56 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/20 16:14:40 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_node	*sh_cmdsuffix(t_main *main)
 	t_node	*temp;
 
 	temp = NULL;
-	if ((main->token_curr == NULL) || (main->token_curr->type == SEPARATOR) || (main->token_curr->type == AND_IF) || (main->token_curr->type == OR_IF) ||
+	if ((main->token_curr == NULL) || (main->token_curr->type == SEPARATOR) ||
+	(main->token_curr->type == AND_IF) || (main->token_curr->type == OR_IF) ||
 	(main->token_curr->type == PIPELINE) || (main->token_curr->type == NEWLINE))
 		return (NULL);
 	if ((sh_is_a_redirect(main->token_curr) == false) &&
@@ -42,16 +43,15 @@ t_node	*sh_cmdsuffix(t_main *main)
 			curr = curr->right;
 	}
 	else
-	{
 		return (sh_lexer_tree_error(main));
-	}
 	return (sh_cmdsuffix_while(main, first, curr, temp));
 }
 
 t_node	*sh_cmdsuffix_while
 	(t_main *main, t_node *first, t_node *curr, t_node *temp)
 {
-	while (main->token_curr != NULL && main->token_curr->type != SEPARATOR && main->token_curr->type != AND_IF && main->token_curr->type != OR_IF &&
+	while (main->token_curr != NULL && main->token_curr->type != SEPARATOR &&
+	main->token_curr->type != AND_IF && main->token_curr->type != OR_IF &&
 	(main->token_curr->type != PIPELINE) && (main->token_curr->type != NEWLINE))
 	{
 		if ((sh_is_a_redirect(main->token_curr) == false) &&

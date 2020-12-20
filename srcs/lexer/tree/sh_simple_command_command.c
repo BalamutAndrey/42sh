@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 15:03:57 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/19 09:03:51 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/20 16:40:18 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ t_node	*sh_simplecommand_cmdprefix_cmdword(t_main *main)
 	}
 	if ((cmd = sh_cmdname(main)) == NULL)
 	{
-		sh_lexer_del_all_node(&prefix);
 		main->token_curr = before_prefix;
-		return (NULL);
+		return (sh_lexer_del_all_node(&prefix));
 	}
 	for_cmd = prefix;
 	while (for_cmd->right != NULL)

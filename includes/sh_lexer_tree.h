@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:20:14 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/09 16:31:51 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/20 16:37:21 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@
 **                  ;
 ** sequential_sep   : ';' linebreak +
 **                  | newline_list  +
-**                  ;
+**                  ;sh_lexer_func
 */
 
 /*
@@ -182,7 +182,7 @@ void	sh_lexer_copy_token(t_main *main);
 t_node	*sh_lexer_create_node(t_main *main, t_token *token, t_type type);
 void	sh_lexer_add_node(t_node *node, t_node *left, t_node *right);
 void	sh_lexer_del_node(t_node **node);
-void	sh_lexer_del_all_node(t_node **node);
+t_node	*sh_lexer_del_all_node(t_node **node);
 
 /*
 ** sh_lexer_tree_error.c
@@ -211,6 +211,7 @@ t_node	*sh_andor(t_main *main);
 t_node	*sh_andor_pipeline(t_main *main);
 t_node	*sh_andor_andor_andif_linebreak_pipeline(t_main *main);
 t_node	*sh_andor_andor_orif_linebreak_pipeline(t_main *main);
+t_node	*sh_andor_dels_nodes(t_main *main, t_node *one, t_node *two);
 
 /*
 ** sh_pipeline.c

@@ -125,6 +125,7 @@ TREE_NAME=sh_and_or.c \
 		sh_wordlist.c
 ES_NAME=sh_exec_struct_argv.c \
 		sh_exec_struct_create.c \
+		sh_exec_struct_create_go.c \
 		sh_exec_struct_new.c \
 		sh_exec_struct_redirect.c \
 		sh_exec_struct_assigment_word.c \

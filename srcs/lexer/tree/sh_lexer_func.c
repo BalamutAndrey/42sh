@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_lexer_func.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:07:07 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/04 18:16:17 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/20 16:18:12 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	sh_lexer_del_node(t_node **node)
 	ft_memdel((void **)node);
 }
 
-void	sh_lexer_del_all_node(t_node **node)
+t_node	*sh_lexer_del_all_node(t_node **node)
 {
 	t_node	*temp;
 	t_node	*temp2;
@@ -51,4 +51,5 @@ void	sh_lexer_del_all_node(t_node **node)
 		temp = temp2;
 	}
 	*node = NULL;
+	return (NULL);
 }

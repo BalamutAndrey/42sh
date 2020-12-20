@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:35:36 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/19 11:08:11 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/20 16:13:03 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,11 @@ t_node	*sh_andor_andor_andif_linebreak_pipeline(t_main *main)
 	{
 		andif = sh_lexer_create_node(main, main->token_curr, AND_IF);
 		if (main->token_curr->next == NULL)
-		{
-			sh_lexer_del_all_node(&right);
-			sh_lexer_del_all_node(&andif);
-			return (sh_lexer_tree_error(main));
-			// return (NULL);
-		}
+			return (sh_andor_dels_nodes(main, right, andif));
 		main->token_curr = main->token_curr->next;
 		left = sh_andor(main);
 		if (left == NULL)
-		{
-			sh_lexer_del_all_node(&andif);
-			sh_lexer_del_all_node(&right);
-			return (sh_lexer_tree_error(main));
-			// return (NULL);
-		}
+			return (sh_andor_dels_nodes(main, right, andif));
 		sh_lexer_add_node(andif, left, right);
 		return (andif);
 	}
@@ -114,21 +104,11 @@ t_node	*sh_andor_andor_orif_linebreak_pipeline(t_main *main)
 	{
 		orif = sh_lexer_create_node(main, main->token_curr, OR_IF);
 		if (main->token_curr->next == NULL)
-		{
-			sh_lexer_del_all_node(&right);
-			sh_lexer_del_all_node(&orif);
-			return (sh_lexer_tree_error(main));
-			// return (NULL);
-		}
+			return (sh_andor_dels_nodes(main, right, orif));
 		main->token_curr = main->token_curr->next;
 		left = sh_andor(main);
 		if (left == NULL)
-		{
-			sh_lexer_del_all_node(&orif);
-			sh_lexer_del_all_node(&right);
-			return (sh_lexer_tree_error(main));
-			// return (NULL);
-		}
+			return (sh_andor_dels_nodes(main, right, orif));
 		sh_lexer_add_node(orif, left, right);
 		return (orif);
 	}
@@ -136,4 +116,11 @@ t_node	*sh_andor_andor_orif_linebreak_pipeline(t_main *main)
 	sh_lexer_del_all_node(&right);
 	sh_lexer_del_all_node(&left);
 	return (NULL);
+}
+
+t_node	*sh_andor_dels_nodes(t_main *main, t_node *one, t_node *two)
+{
+	sh_lexer_del_all_node(&one);
+	sh_lexer_del_all_node(&two);
+	return (sh_lexer_tree_error(main));
 }

@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 15:59:55 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/09 16:31:04 by eboris           ###   ########.fr       */
+/*   Updated: 2020/12/20 16:13:33 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ t_node	*sh_cmdprefix(t_main *main)
 	{
 		return (temp);
 	}
-	// else if ((temp = sh_cmdprefix_assignment_word(main)) != NULL)
-	// {
-	// 	return (temp);
-	// }
 	else if ((temp = sh_cmdprefix_cmdprefix_assignment_word(main)) != NULL)
 	{
 		return (temp);
