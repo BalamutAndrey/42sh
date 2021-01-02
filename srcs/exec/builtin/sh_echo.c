@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 18:11:10 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/08 15:04:24 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/02 17:26:53 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		sh_echo_get_flags(char **argv, int flags[2])
 		else
 			return (i);
 	}
-	return (1);
+	return (i);
 }
 
 int		sh_echo_with_changes(char **str, int j, int flags[2], t_main *main)
