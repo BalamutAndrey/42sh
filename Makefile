@@ -69,7 +69,8 @@ LX_NAME=sh_add_heredoc_content.c \
 		sh_quote_remove.c \
 		sh_quote_remove_funcs.c \
 		sh_token_quote_remove.c \
-		sh_token_struct.c
+		sh_token_struct.c \
+		sh_lexer_alias_check.c
 TREE_NAME=sh_and_or.c \
 		sh_brace_group.c \
 		sh_case_clause.c \

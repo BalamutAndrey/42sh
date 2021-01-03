@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 11:47:56 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/06 17:40:14 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/03 17:13:55 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	sh_struct_set_default_values(t_main *new)
 	new->cpid = -1;
 	new->alias = NULL;
 	new->vars = NULL;
+	new->ks_res = NULL;
 }
 
 t_main	*sh_add_main_struct(char **env)

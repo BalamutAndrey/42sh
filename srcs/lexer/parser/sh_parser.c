@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:02:16 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/20 14:35:47 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/03 19:08:38 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,15 @@ void	sh_parser(t_main *main)
 	int		empty;
 	int		here_err;
 	int		fbrace_err;
+/*	char	*tmp;
 
+	if (main->ks_res)
+	{
+		tmp = main->ks_res;
+		main->ks_res = main->ks;
+		main->ks = tmp;
+		tmp = NULL;
+	}*/
 	empty = sh_is_str_empty(main->ks);
 	if (!main->prompt && !main->heredoc)
 		sh_check_quotes(main);
@@ -104,7 +112,8 @@ void	sh_parser(t_main *main)
 	}
 	if (!main->prompt && empty == 0 && here_err != -2 && fbrace_err != 1)
 	{
-		sh_lexer(main);
+		if (sh_lexer(main) == 1)
+			sh_parser(main);
 		sh_lexer_tree_new(main);
 		if (main->tree_first != NULL)
 			sh_exec_struct_create(main);

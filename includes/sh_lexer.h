@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 16:38:41 by eboris            #+#    #+#             */
-/*   Updated: 2020/10/31 19:19:34 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/03 18:33:03 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,8 @@ void	sh_delete_envvars(t_envvar *envvar);
 */
 void	sh_remove_char(int i, t_token *token, t_main *main);
 int		sh_is_protected(char *str, int i);
-
+/*
+** sh_lexer_alias_check.c
+*/
+int		sh_lexer_alias_check(t_main *main);
 #endif

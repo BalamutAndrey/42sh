@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:13:46 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/20 18:15:43 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/03 19:08:18 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,40 @@ void	sh_lexer_hub(t_main *main, t_token *token)
 	}
 }
 
+void	tmp_add_alias(t_main *main)
+{
+	main->alias = sh_memalloc(sizeof(t_alias), main);
+	main->alias->next = NULL;
+	main->alias->name = ft_strdup("aa");
+	main->alias->command = ft_strdup("echo 123");
+}
+
 int		sh_lexer(t_main *main)
 {
 	t_token	*first;
 
+	tmp_add_alias(main);
 	first = sh_new_token(0, NULL, main);
 	sh_lexer_hub(main, first);
 	main->token = first->next;
 	free(first);
 	first = NULL;
+/*	if (sh_lexer_alias_check(main) == 1)
+	{
+		//sh_delete_trash
+		return (1);
+	}
+	else if (main->ks_res)
+		{
+			ft_strdel(&main->ks);
+			main->ks = sh_strdup(main->ks_res, main);
+			ft_strdel(&main->ks_res);
+//			tmp = main->ks_res;
+//			main->ks_res = main->ks;
+//			main->ks = tmp;
+//			tmp = NULL;
+//			main->ks = main->ks_res; //временно тут, будем еще думать
+		}*/
 	if (main->heredoc)
 		sh_add_heredoc_content(main);
 	sh_quote_remove(main, main->token);

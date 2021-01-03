@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_structs.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/19 09:41:52 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/03 17:13:42 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct			s_main
 	int32_t				cpid;
 	t_fds				*opfds;
 	t_vars				*vars;
+	char				*ks_res;
 }						t_main;
 
 /*
