@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/13 17:33:07 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/06 19:59:47 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,15 @@ char	*sh_alias(t_exec *exec, t_main *main);
 /*
 ** sh_alias_print.c
 */
-char	*sh_alias_print(t_main *main);
-char	*sh_alias_print_one(t_main *main, char *name);
+void	sh_alias_print(t_main *main);
+void	sh_alias_print_one(t_main *main, char *name);
 
 /*
 ** sh_alias_arg.c 
 */
 char	*sh_alias_arg(t_exec *exec, t_main *main);
-t_alias	*sh_alias_new(t_main *main, char *str);
-
+void	sh_alias_new(t_main *main, char *str);
+void	sh_alias_replace(t_main *main, char *str);
 /*
 ** sh_builtin_set.c 
 */

@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:14:02 by geliz             #+#    #+#             */
-/*   Updated: 2020/10/31 17:37:50 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/06 14:21:02 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 void	sh_count_quotes(t_main *main, int cq[2])
 {
 	int		i;
+	char	*str;
 
 	i = 0;
-	while (main->ks[i])
+	str = main->ks;
+	while (str[i])
 	{
-		if (main->ks[i] == '\"' && cq[0] == 0)
+		if (str[i] == '\"' && cq[0] == 0)
 		{
-			if (sh_is_protected(main->ks, i) == 0)
+			if (sh_is_protected(str, i) == 0)
 				cq[1]++;
 		}
-		else if (main->ks[i] == '\'' && cq[1] == 0)
+		else if (str[i] == '\'' && cq[1] == 0)
 		{
-			if ((cq[0] % 2 == 0 && sh_is_protected(main->ks, i) == 0) ||
+			if ((cq[0] % 2 == 0 && sh_is_protected(str, i) == 0) ||
 				cq[0] % 2 != 0)
 				cq[0]++;
 		}

@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:02:16 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/03 19:08:38 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/06 14:25:03 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,16 @@ int		sh_check_fbraces(t_main *main)
 {
 	int		i;
 	int		count;
+	char	*str;
 
 	i = 0;
 	count = 0;
-	while (main->ks[i])
+	str = main->ks_res ? main->ks_res : main->ks;
+	while (str[i])
 	{
-		if (main->ks[i] == '{' && sh_is_protected(main->ks, i) == 0)
+		if (str[i] == '{' && sh_is_protected(str, i) == 0)
 			count++;
-		if (main->ks[i] == '}' && sh_is_protected(main->ks, i) == 0 && count > 0)
+		if (str[i] == '}' && sh_is_protected(str, i) == 0 && count > 0)
 			count--;
 		i++;
 	}
@@ -87,16 +89,19 @@ void	sh_parser(t_main *main)
 	int		empty;
 	int		here_err;
 	int		fbrace_err;
-/*	char	*tmp;
+//	int		alias;
+//	int		i;
 
-	if (main->ks_res)
-	{
-		tmp = main->ks_res;
-		main->ks_res = main->ks;
-		main->ks = tmp;
-		tmp = NULL;
-	}*/
 	empty = sh_is_str_empty(main->ks);
+//	alias = 0;
+/*	if (main->ks_tmp && ft_strcmp(main->ks, main->ks_tmp) != 0)
+	{
+		i = 0;
+		while (main->ks[i] == main->ks_tmp[i])
+			i++;
+		main->ks_res = sh_strjoin_arg(main, "%f %s", main->ks_res, &main->ks[i]);
+	}*/
+//	ft_printf("main->ks = %s\nmain->ks_res = %s\n", main->ks, main->ks_res);
 	if (!main->prompt && !main->heredoc)
 		sh_check_quotes(main);
 	if (!main->prompt && !main->heredoc)
@@ -112,12 +117,14 @@ void	sh_parser(t_main *main)
 	}
 	if (!main->prompt && empty == 0 && here_err != -2 && fbrace_err != 1)
 	{
-		if (sh_lexer(main) == 1)
-			sh_parser(main);
+		sh_lexer(main);
 		sh_lexer_tree_new(main);
 		if (main->tree_first != NULL)
 			sh_exec_struct_create(main);
 		if (main->exec_first != NULL)
 			sh_exec(main, main->exec_first);
+		ft_strdel(&main->ks_res);
 	}
+//	if (alias == 1 && !main->ks_tmp && main->prompt)
+//		main->ks_tmp = sh_strdup(main->ks, main);
 }

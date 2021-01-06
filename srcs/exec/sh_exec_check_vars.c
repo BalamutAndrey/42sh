@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 17:31:14 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/13 18:35:00 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/06 15:41:49 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	sh_check_variables(t_exec *exec, t_main *main)
 
 	if (!main->vars)
 		sh_get_vars_from_env(main);
-	if (!exec->vars)
+	if (!exec->vars || (exec->argv && (ft_strcmp(exec->argv[0], "alias") == 0)))
 		return ;
 	i = 0;
 	while (exec->vars[i])

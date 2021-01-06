@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 18:36:28 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/19 12:41:46 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/06 14:21:23 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	sh_check_pipe(t_main *main)
 {
 	int		j;
+	char	*str;
 
-	j = ft_strlen(main->ks) - 1;
-	if (j > 0 && main->ks[j] == '|' &&
-		main->ks[j - 1] != '\\' && main->ks[j - 1] != '|')
+	str = main->ks;
+	j = ft_strlen(str) - 1;
+	if (j > 0 && str[j] == '|' && str[j - 1] != '|' &&
+		(sh_is_protected(str, j) == 0))
 	{
 		main->prompt = sh_strdup("pipe", main);
 	}

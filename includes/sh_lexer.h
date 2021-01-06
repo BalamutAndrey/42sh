@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 16:38:41 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/03 18:33:03 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/06 16:21:12 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 ** sh_lexer.c
 */
-int		sh_lexer(t_main *main);
+void	sh_lexer(t_main *main);
 void	sh_lexer_hub(t_main *main, t_token *token);
 int		sh_check_end_of_token_position(char *str, int *io_nbr_flag);
 int		sh_find_end_of_token(int i, char *str);
@@ -77,4 +77,5 @@ int		sh_is_protected(char *str, int i);
 ** sh_lexer_alias_check.c
 */
 int		sh_lexer_alias_check(t_main *main);
+int		sh_lexer_alias_is_redir(t_token *tok);
 #endif

@@ -3,32 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   sh_alias_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:14:01 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/04 17:05:00 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/06 18:25:58 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
+char	*sh_alias_err_get(char *str, t_main *main)
+{
+	char	*ret;
+
+	ret = sh_strjoin_arg(main, "%s %f %s", "42sh: alias: ", 
+		sh_strdup(str, main), ": not found\n");
+	return (ret);
+}
+
 char	*sh_alias_arg(t_exec *exec, t_main *main)
 {
 	char	*fin;
+	char	*err;
+	char	*tmp;
+	int		i;
 
 	fin = NULL;
-	if (ft_strchr(exec->argv[1], '=') == NULL)
+	err = NULL;
+	i = 1;
+	while (exec->argv[i])
 	{
-		sh_alias_print_one(main, exec->argv[1]);
+		if (ft_strchr(exec->argv[i], '='))
+			sh_alias_new(main, exec->argv[i]);
+		else
+		{
+			tmp = sh_alias_print_one(main, exec->argv[i]);
+			if (!tmp)
+				err = sh_strjoin_arg(main, "%f %f", err,
+					sh_alias_err_get(exec->argv[i], main));
+			// else
+			// 	fin = sh_strjoin_arg(main, "%f %f", fin, tmp);
+		}
+		i++;
 	}
-	else
+/*	if (err)
 	{
-		main->alias = sh_alias_new(main, exec->argv[1]);
-	}
-	return (fin);
+		ft_fprintf(STDERR_FILENO, "%s", err);
+		ft_strdel(&err);
+	}*/
+	return (err);
 }
 
-t_alias	*sh_alias_new(t_main *main, char *str)
+void	sh_alias_new(t_main *main, char *str)
 {
 	t_alias	*new;
 	char	*temp;
@@ -43,14 +69,34 @@ t_alias	*sh_alias_new(t_main *main, char *str)
 	}
 	new->name = ft_strmbncpy(temp, i);
 	new->command = ft_strmancpy(temp, i + 1);
-	new->next = NULL;
-	main->alias_end->next = new;
-	main->alias_end = new;
-	return (new);
+	new->next = main->alias;
+	main->alias = new;
+	sh_alias_replace(main, new->name);
+//	main->alias_end->next = new;
+//	main->alias_end = new;
+//	return (new);
 }
 
 void	sh_alias_replace(t_main *main, char *str)
 {
-	(void)main;
-	(void)str;
+	t_alias	*tmp;
+	t_alias	*prev;
+
+	tmp = main->alias->next;
+	prev = main->alias;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, str) == 0)
+		{
+			prev->next = tmp->next;
+			ft_strdel(&tmp->name);
+			ft_strdel(&tmp->command);
+			tmp->next = NULL;
+			free(tmp);
+			tmp = NULL;
+		}
+		prev = tmp;
+		if (tmp)
+			tmp = tmp->next;
+	}
 }
