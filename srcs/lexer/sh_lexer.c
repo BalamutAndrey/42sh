@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:13:46 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/06 19:54:59 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 16:40:27 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,35 @@ void	sh_lexer_alias_assig_check(t_main *main)
 	}
 }
 
+void	sh_lex_remove_token(t_main *main)
+{
+	t_token		*tok;
+	t_token		*nxt;
+	t_envvar	*env;
+	t_envvar	*env_nxt;
+
+	tok = main->token;
+	while (tok)
+	{
+		ft_strdel(&tok->content);
+		env = tok->envvar;
+		while (env)
+		{
+			env_nxt = env->next;
+			env->str = NULL;
+			free(env);
+			env = env->next;
+		}
+		nxt = tok->next;
+		free(tok);
+		tok = nxt;
+	}
+}
+
 void	sh_lexer(t_main *main)
 {
 	t_token	*first;
 
-//	tmp_add_alias(main);
 	first = sh_new_token(0, NULL, main);
 	sh_lexer_hub(main, first);
 	main->token = first->next;
@@ -147,7 +171,7 @@ void	sh_lexer(t_main *main)
 	first = NULL;
 	if (sh_lexer_alias_check(main) == 1)
 	{
-		sh_remove_token(main);
+		sh_lex_remove_token(main);
 		sh_lexer(main);
 	}
 	else

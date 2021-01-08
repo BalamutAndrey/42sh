@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/08 13:27:58 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 15:09:45 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct			s_exec {
 typedef struct 			s_alias {
 	char				*name;
 	char				*command;
+	int					recurs;
 	struct s_alias		*next;
 }						t_alias;
 

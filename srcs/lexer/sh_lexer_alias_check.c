@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:14:11 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/05 20:57:30 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 16:24:22 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,39 @@ int		sh_lexer_alias_selection(t_main *main, t_token *tok)
 {
 	t_alias		*al;
 	int			ret;
+	char		*tmp;
 
 	al = main->alias;
+	tmp = sh_strdup(tok->content, main);
 	ret = 0;
 	while (al)
 	{
-		if (ft_strcmp(al->name, tok->content) == 0)
+		if (ft_strcmp(al->name, tmp) == 0)
 		{
-//			ft_printf("her;");
-			ft_strdel(&tok->content);
-			tok->content = sh_strdup(al->command, main);
-			
-//			if (al->command[ft_strlen(al->command) - 1] == ' ' && tok->next &&
-//				tok->next->type == WORD)
-//				sh_lexer_alias_selection(main, tok->next);
-			ret = 1;
-//			sh_lexer_alias_selection(main, tok);
+			ft_strdel(&tmp);
+			tmp = sh_strdup(al->command, main);
+			if (ft_strcmp(al->command, tok->content) == 0 && al->recurs == 1)
+			{
+				ret = 0;
+				al = NULL;
+			}
+			else
+			{
+				ret = 1;
+				al->recurs = 1;
+				al = main->alias;
+			}
 		}
-		al = al->next;
+		else
+			al = al->next;
 	}
+	if (ret == 1)
+	{
+		ft_strdel(&tok->content);
+		tok->content = tmp;
+	}
+	else
+		ft_strdel(&tmp);
 	return (ret);
 }
 
@@ -81,7 +95,6 @@ int		sh_lexer_alias_check(t_main *main)
 //		ft_printf("tok = %i%s\n", tok->type, tok->content);
 		if (tok->type == WORD)
 		{
-//			ft_printf("t_cont = %s\n", tok->content);
 			if (sh_lexer_alias_selection(main, tok) == 1 && flag == 0)
 				flag = 1;
 			while (tok)

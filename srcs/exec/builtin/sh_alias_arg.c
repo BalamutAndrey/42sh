@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:14:01 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/08 13:27:47 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 16:26:11 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ void	sh_alias_new(t_main *main, char *str)
 	}
 	new->name = ft_strmbncpy(temp, i);
 	new->command = ft_strmancpy(temp, i + 1);
+	new->recurs = 0;
 	new->next = main->alias;
 	main->alias = new;
 	sh_alias_replace(main, new->name);
+
 //	main->alias_end->next = new;
 //	main->alias_end = new;
 //	return (new);
