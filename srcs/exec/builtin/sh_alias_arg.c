@@ -6,20 +6,11 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:14:01 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/08 12:55:15 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 13:27:47 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
-
-char	*sh_alias_err_get(char *str, t_main *main)
-{
-	char	*ret;
-
-	ret = sh_strjoin_arg(main, "%s %f %s", "42sh: alias: ", 
-		sh_strdup(str, main), ": not found\n");
-	return (ret);
-}
 
 char	*sh_alias_arg(t_exec *exec, t_main *main)
 {
@@ -37,9 +28,8 @@ char	*sh_alias_arg(t_exec *exec, t_main *main)
 		else
 		{
 			sh_alias_print_one(main, exec->argv[i]);
-			if (!main->alias_cont)
-				err = sh_strjoin_arg(main, "%f %f", err,
-					sh_alias_err_get(exec->argv[i], main));
+			if (main->alias_error)
+				err = main->alias_error;
 			// else
 			// 	fin = sh_strjoin_arg(main, "%f %f", fin, tmp);
 		}

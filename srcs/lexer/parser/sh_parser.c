@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:02:16 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/06 14:25:03 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 13:36:58 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void	sh_parser(t_main *main)
 			sh_exec(main, main->exec_first);
 		ft_strdel(&main->ks_res);
 	}
+	ft_strdel(&main->alias_cont);
+	main->alias_error = NULL;
 //	if (alias == 1 && !main->ks_tmp && main->prompt)
 //		main->ks_tmp = sh_strdup(main->ks, main);
 }

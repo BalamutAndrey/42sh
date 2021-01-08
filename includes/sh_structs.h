@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/06 19:56:33 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 13:27:58 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct			s_main
 	t_vars				*vars;
 	char				*ks_res;
 	char				*alias_cont;
+	char				*alias_error;
 }						t_main;
 
 /*
