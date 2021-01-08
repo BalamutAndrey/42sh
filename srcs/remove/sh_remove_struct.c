@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:51:52 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/13 15:24:23 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 14:23:22 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	sh_remove_struct(t_main **main)
 	sh_remove_exec(temp);
 	sh_remove_fds(temp);
 	sh_remove_vars(temp);
+	sh_remove_alias(temp);
 	free(*main);
 	*main = NULL;
 	main = NULL;

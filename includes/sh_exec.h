@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:00 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/20 16:44:02 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 13:54:34 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	sh_exec(t_main *main, t_exec *exec);
 void	sh_standart_exec(t_exec *exec, t_main *main);
 int16_t	sh_exec_prog(t_exec *exec, t_main *main, char *err_built);
-void	sh_exec_print_error(int16_t error);
+void	sh_exec_print_error(int16_t error, t_main *main);
 
 /*
 ** sh_redirects_hub.c

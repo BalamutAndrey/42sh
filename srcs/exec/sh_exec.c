@@ -6,14 +6,16 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/08 13:29:30 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 13:57:23 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
-void	sh_exec_print_error(int16_t error)
+void	sh_exec_print_error(int16_t error, t_main *main)
 {
+	if (main->alias_cont)
+		ft_fprintf(STDOUT_FILENO, "%s", main->alias_cont);
 	if (error == 1)
 		ft_fprintf(STDERR_FILENO, "21sh: Access 0 error. Command not found.\n");
 	else if (error == 2)
@@ -53,15 +55,16 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 	int		status;
 
 	r_err = 0;
-	if (err_built || (sh_run_access(exec->argv) != 5))
+	if (err_built || (sh_run_access(exec->argv) != 5) || main->alias_cont)
 	{
 		cpid = fork();
 		if (cpid == 0)
 		{
 			if (exec->redir)
 				r_err = sh_redirects_hub(exec, main);
-			if (r_err >= 0 && (err = sh_exec_prog(exec, main, err_built)) != 0)
-				sh_exec_print_error(err);
+			if (r_err >= 0 && (((err = sh_exec_prog(exec, main, err_built)) != 0) ||
+				main->alias_cont))
+				sh_exec_print_error(err, main);
 		}
 		else
 		{
@@ -90,7 +93,7 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 			err_built = sh_exec_builtin(exec, main);
 		if (redir_err >= 0 &&
 			(error = sh_exec_prog(exec, main, err_built)) != 0)
-			sh_exec_print_error(error);
+			sh_exec_print_error(error, main);
 	}
 	else
 	{
