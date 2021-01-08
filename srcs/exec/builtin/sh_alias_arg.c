@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:14:01 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/06 18:25:58 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 12:55:15 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*sh_alias_arg(t_exec *exec, t_main *main)
 {
 	char	*fin;
 	char	*err;
-	char	*tmp;
 	int		i;
 
 	fin = NULL;
@@ -37,8 +36,8 @@ char	*sh_alias_arg(t_exec *exec, t_main *main)
 			sh_alias_new(main, exec->argv[i]);
 		else
 		{
-			tmp = sh_alias_print_one(main, exec->argv[i]);
-			if (!tmp)
+			sh_alias_print_one(main, exec->argv[i]);
+			if (!main->alias_cont)
 				err = sh_strjoin_arg(main, "%f %f", err,
 					sh_alias_err_get(exec->argv[i], main));
 			// else

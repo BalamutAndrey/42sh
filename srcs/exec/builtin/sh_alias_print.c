@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:12:17 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/06 19:59:38 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/08 12:55:54 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sh_alias_print(t_main *main)
 	char	*fin;
 	t_alias	*temp;
 
-	fin = NULL;
+	fin = main->alias_cont;
 	temp = main->alias;
 	while (temp)
 	{
