@@ -3,15 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/06 19:59:47 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/09 14:50:22 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_BUILTIN_H
 # define SH_BUILTIN_H
+
+/*
+** For type
+*/
+typedef	struct			s_btype
+{
+	bool				a;
+	bool				f;
+	bool				p;
+	bool				t;
+	bool				big_p;
+	char				**cmd;
+}						t_btype;
+
+/*
+** sh_type.c
+*/
+void	sh_type(t_exec *exec, t_main *main);
+t_btype	*sh_type_create_struct(t_main *main);
+void	sh_type_remove_struct(t_btype **new);
+void	sh_type_write_struct(t_btype new, t_exec *exec, t_main *main);
+
+/*
+** sh_type_args.c
+*/
+bool	sh_type_read_args(t_exec *exec, t_btype *new, t_main *main);
+bool	sh_type_arg_keys(t_btype *new, char *str);
+bool	sh_type_arg_key_check(t_btype *new, char c);
+bool	sh_type_arg_cmds(t_btype *new, char **argv, int i, t_main *main);
+void	sh_type_arg_cmds_write(t_btype *new, char **argv, int i, t_main *main);
 
 /*
 ** sh_cd.c

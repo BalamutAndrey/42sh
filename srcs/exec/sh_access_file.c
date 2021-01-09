@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_access_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 15:35:21 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/06 18:12:08 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/09 12:34:08 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ bool	sh_is_builtin(char *str)
 		(ft_strcmp(str, "setenv") == 0) ||
 		(ft_strcmp(str, "unsetenv") == 0) ||
 		(ft_strcmp(str, "pwd") == 0) ||
+		(ft_strcmp(str, "type") == 0) ||
 		(ft_strcmp(str, "set") == 0) ||
 		(ft_strcmp(str, "unset") == 0) ||
 		(ft_strcmp(str, "export") == 0))

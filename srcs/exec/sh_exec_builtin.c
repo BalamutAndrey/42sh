@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/08 13:57:48 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/09 12:53:44 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main)
 		// if (main->alias_cont)
 		// 	sh_alias_cont_print(exec, main);
 	}
+	else if (ft_strcmp(exec->argv[0], "type") == 0)
+		sh_type(exec, main);
 	else if (ft_strcmp(exec->argv[0], "setenv") == 0)
 		finish = sh_builtin_setenv(exec, main);
 	else if (ft_strcmp(exec->argv[0], "unsetenv") == 0)
