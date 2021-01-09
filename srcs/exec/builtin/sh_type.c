@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:34:04 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/09 14:56:18 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/09 16:57:31 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@ void	sh_type(t_exec *exec, t_main *main)
 		int i = 0;
 		while (new->cmd[i] != NULL)
 		{
-			ft_printf("cmd[%i] = %s\n", i, new->cmd[i]);
+			ft_printf("cmd[%i] = %s\t\t\tfin[%i] = %s\n", i, new->cmd[i], i, new->fin[i]);
 			i++;
 		}
 		// END FOR TEST ONLY
 	}
 	else
 	{
-		ft_fprintf(STDERR_FILENO,
-			"42sh: type: usage: type [-afptP] name [name ...]\n");
+		sh_type_args_usage();
 	}
 	sh_type_remove_struct(&new);
 }
@@ -52,6 +51,7 @@ t_btype	*sh_type_create_struct(t_main *main)
 	new->t = false;
 	new->big_p = false;
 	new->cmd = NULL;
+	new->fin = NULL;
 	return (new);
 }
 
@@ -67,10 +67,14 @@ void	sh_type_remove_struct(t_btype **new)
 		while (temp->cmd[i] != NULL)
 		{
 			ft_strdel(&temp->cmd[i]);
+			if (temp->fin[i] != NULL)
+				ft_strdel(&temp->fin[i]);
 			i++;
 		}
 		free(temp->cmd);
+		free(temp->fin);
 		temp->cmd = NULL;
+		temp->fin = NULL;
 	}
 	free(temp);
 	temp = NULL;

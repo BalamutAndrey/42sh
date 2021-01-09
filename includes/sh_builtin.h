@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/09 14:50:22 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/09 16:56:22 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef	struct			s_btype
 	bool				t;
 	bool				big_p;
 	char				**cmd;
+	char				**fin;
 }						t_btype;
 
 /*
@@ -38,10 +39,21 @@ void	sh_type_write_struct(t_btype new, t_exec *exec, t_main *main);
 ** sh_type_args.c
 */
 bool	sh_type_read_args(t_exec *exec, t_btype *new, t_main *main);
-bool	sh_type_arg_keys(t_btype *new, char *str);
-bool	sh_type_arg_key_check(t_btype *new, char c);
-bool	sh_type_arg_cmds(t_btype *new, char **argv, int i, t_main *main);
-void	sh_type_arg_cmds_write(t_btype *new, char **argv, int i, t_main *main);
+void	sh_type_args_usage(void);
+
+/*
+** sh_type_args_keys.c
+*/
+bool	sh_type_args_keys(t_btype *new, char *str);
+bool	sh_type_args_key_check(t_btype *new, char c);
+bool	sh_type_args_key_check_other(t_btype *new, char c);
+
+/*
+** sh_type_args_cmds.c
+*/
+bool	sh_type_args_cmds(t_btype *new, char **argv, int i, t_main *main);
+void	sh_type_args_cmds_write(t_btype *new, char **argv, int i, t_main *main);
+void	sh_type_args_fin_write(t_btype *new, int n, t_main *main);
 
 /*
 ** sh_cd.c
