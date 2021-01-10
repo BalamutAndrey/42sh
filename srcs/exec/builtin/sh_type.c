@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:34:04 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/09 16:57:31 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/10 15:25:28 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,27 @@
 void	sh_type(t_exec *exec, t_main *main)
 {
 	t_btype	*new;
+	int		i;
 
 	new = sh_type_create_struct(main);
+	i = 0;
 	if (sh_type_read_args(exec, new, main) == true)
 	{
-		// FOR TEST ONLY
-		ft_printf("a = %i\n", new->a);
-		ft_printf("f = %i\n", new->f);
-		ft_printf("p = %i\n", new->p);
-		ft_printf("t = %i\n", new->t);
-		ft_printf("P = %i\n --- \n", new->big_p);
-		int i = 0;
+		if (!new->f && !new->p && !new->t && !new->big_p)
+		{
+			new->f = true;
+			new->p = true;
+		}
+		sh_type_check_cmd(main, new);
 		while (new->cmd[i] != NULL)
 		{
-			ft_printf("cmd[%i] = %s\t\t\tfin[%i] = %s\n", i, new->cmd[i], i, new->fin[i]);
+			if (new->fin[i] != NULL)
+				ft_printf("%s\n", new->fin[i]);
 			i++;
 		}
-		// END FOR TEST ONLY
 	}
 	else
-	{
 		sh_type_args_usage();
-	}
 	sh_type_remove_struct(&new);
 }
 
@@ -79,4 +78,30 @@ void	sh_type_remove_struct(t_btype **new)
 	free(temp);
 	temp = NULL;
 	*new = NULL;
+}
+
+void	sh_type_check_cmd(t_main *main, t_btype *new)
+{
+	int i;
+
+	i = 0;
+	while (new->cmd[i] != NULL)
+	{
+		if (new->a == true)
+			sh_type_check_a(main, new, i);
+		else
+		{
+			if (new->f == true)
+				sh_type_check_f(main, new, i);
+			if (new->p == true)
+				sh_type_check_p(main, new, i);
+			if (new->t == true)
+				sh_type_check_t(main, new, i);
+			if (new->big_p == true)
+				sh_type_check_bigp(main, new, i);
+		}
+		if (new->fin[i] != NULL)
+			new->fin[i][ft_strlen(new->fin[i]) - 1] = '\0';
+		i++;
+	}
 }

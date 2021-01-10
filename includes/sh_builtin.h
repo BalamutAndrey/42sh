@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/09 16:56:22 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/10 15:25:47 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	sh_type(t_exec *exec, t_main *main);
 t_btype	*sh_type_create_struct(t_main *main);
 void	sh_type_remove_struct(t_btype **new);
 void	sh_type_write_struct(t_btype new, t_exec *exec, t_main *main);
+void	sh_type_check_cmd(t_main *main, t_btype *new);
 
 /*
 ** sh_type_args.c
@@ -54,6 +55,15 @@ bool	sh_type_args_key_check_other(t_btype *new, char c);
 bool	sh_type_args_cmds(t_btype *new, char **argv, int i, t_main *main);
 void	sh_type_args_cmds_write(t_btype *new, char **argv, int i, t_main *main);
 void	sh_type_args_fin_write(t_btype *new, int n, t_main *main);
+
+/*
+** sh_type_check_cmd.c
+*/
+void	sh_type_check_f(t_main *main, t_btype *new, int i);
+void	sh_type_check_p(t_main *main, t_btype *new, int i);
+void	sh_type_check_t(t_main *main, t_btype *new, int i);
+void	sh_type_check_bigp(t_main *main, t_btype *new, int i);
+void	sh_type_check_a(t_main *main, t_btype *new, int i);
 
 /*
 ** sh_cd.c

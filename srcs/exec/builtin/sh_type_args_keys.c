@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 16:25:44 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/09 16:33:45 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/10 13:44:56 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ bool	sh_type_args_key_check(t_btype *new, char c)
 	}
 	else if (c == 'f')
 	{
+		new->t = false;
 		new->f = true;
 	}
 	else if (c == 'p')
 	{
 		new->p = true;
-		new->f = false;
+		new->big_p = false;
 	}
 	else
 	{
@@ -68,11 +69,12 @@ bool	sh_type_args_key_check_other(t_btype *new, char c)
 	if (c == 't')
 	{
 		new->t = true;
+		new->f = false;
 	}
 	else if (c == 'P')
 	{
 		new->big_p = true;
-		new->a = false;
+		new->p = false;
 	}
 	else
 		return (false);

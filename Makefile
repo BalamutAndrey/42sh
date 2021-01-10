@@ -159,6 +159,7 @@ EX_BN_NAME=sh_cd.c \
 		sh_type_args.c \
 		sh_type_args_keys.c \
 		sh_type_args_cmds.c \
+		sh_type_check_cmd.c \
 		sh_builtin_env.c \
 		sh_builtin_setenv.c \
 		sh_builtin_unsetenv.c \
