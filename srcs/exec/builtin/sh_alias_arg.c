@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 14:14:01 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/08 16:26:11 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/17 16:08:27 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*sh_alias_arg(t_exec *exec, t_main *main)
 	i = 1;
 	while (exec->argv[i])
 	{
-		if (ft_strchr(exec->argv[i], '='))
+		if (exec->argv[i][0] != '=' && ft_strchr(exec->argv[i], '='))
 			sh_alias_new(main, exec->argv[i]);
 		else
 		{

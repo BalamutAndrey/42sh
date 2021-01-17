@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/08 16:20:53 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/17 19:55:51 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void	sh_exec_print_error(int16_t error, t_main *main)
 {
 	if (main->alias_cont)
+	{
 		ft_fprintf(STDOUT_FILENO, "%s", main->alias_cont);
+		if (error == 0)
+			exit(0);
+	}
 	if (error == 1)
 		ft_fprintf(STDERR_FILENO, "21sh: Access 0 error. Command not found.\n");
 	else if (error == 2)
@@ -24,7 +28,7 @@ void	sh_exec_print_error(int16_t error, t_main *main)
 		ft_fprintf(STDERR_FILENO, "21sh: Not a file of link.\n");
 	else if (error == 4)
 		ft_fprintf(STDERR_FILENO, "21sh: Unknown error.\n");
-	exit(0);
+	exit(2);
 }
 
 int16_t	sh_exec_prog(t_exec *exec, t_main *main, char *err_built)
@@ -69,7 +73,9 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 		else
 		{
 			main->cpid = cpid;
-			waitpid(cpid, &status, 0);
+			waitpid(cpid, &status, WUNTRACED);
+			exec->exit_s = status;
+			ft_printf("status = %i\n", status);
 			main->cpid = -1;
 			ft_strdel(&err_built);
 			sh_signal_status(status, cpid);
@@ -103,6 +109,57 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 	}
 }
 
+t_exec	*sh_or_if_and_if_check(t_exec *exec)
+{
+	t_exec	*tmp;
+
+	return (exec->next);
+	tmp = exec;
+	if (!exec->next)
+		return (NULL);
+	if (exec->next->andif == false && exec->next->orif == false)
+		return (exec->next);
+	if (exec->next->andif == true)
+	{
+		if (exec->exit_s == 0)
+		{
+			return (exec->next);
+		}
+		else
+		{
+			while (tmp)
+			{
+				if ((tmp->next && tmp->next->andif == true) || !tmp->next)
+					tmp = tmp->next;
+				else if (tmp->next && tmp->next->andif == false && tmp->next->orif == false)
+					return (tmp->next);
+				else if (tmp->next && tmp->next->orif == true)
+					return (tmp->next);
+			}
+			return (tmp);
+		}
+	}
+	if (exec->next->orif == true)
+	{
+		if (exec->exit_s != 0)
+			return (exec->next);
+		else
+		{
+			while (tmp)
+			{
+				if ((tmp->next && tmp->next->orif == true) || !tmp->next)
+					tmp = tmp->next;
+				else if (tmp->next && tmp->next->andif == false && tmp->next->orif == false)
+					return (tmp->next);
+				else if (tmp->next->andif == true)
+					return (tmp->next);
+			}
+			return (tmp);
+		}
+	}
+	return (exec->next);
+}
+
 void	sh_exec(t_main *main, t_exec *exec)
 {
 	while (exec)
@@ -111,6 +168,7 @@ void	sh_exec(t_main *main, t_exec *exec)
 			sh_get_vars_from_env(main);
 //		sh_check_variables(exec, main);
 		tcsetattr(main->fd, TCSANOW, &main->t_start);
+//		ft_printf("exec->&& = %i exec->|| = %i\n", exec->andif, exec->orif);
 		if (exec->next && exec->next->pipe == true)
 		{
 			sh_exec_piped_commands(exec, main);
@@ -124,7 +182,8 @@ void	sh_exec(t_main *main, t_exec *exec)
 				sh_check_variables(exec, main);
 			sh_change_envvars_in_exec(main, exec);
 			sh_standart_exec(exec, main);
-			exec = exec->next;
+			exec = sh_or_if_and_if_check(exec);
+//			exec = exec->next;
 		}
 		tcsetattr(main->fd, TCSANOW, &main->t_curr);
 	}
