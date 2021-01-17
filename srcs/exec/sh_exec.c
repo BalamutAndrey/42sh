@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/17 19:55:51 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/17 20:27:13 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 		else
 		{
 			main->cpid = cpid;
-			waitpid(cpid, &status, WUNTRACED);
+			waitpid(cpid, &status, 0);
 			exec->exit_s = status;
-			ft_printf("status = %i\n", status);
+	//		ft_printf("status = %i\n", status);
 			main->cpid = -1;
 			ft_strdel(&err_built);
 			sh_signal_status(status, cpid);
