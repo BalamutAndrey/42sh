@@ -1,7 +1,7 @@
 NAME=42sh
 
 CC=gcc
-FLAGS=-g -Wall -Wextra -Werror
+FLAGS=-g #-Wall -Wextra -Werror
 
 SRC_DIR=./srcs
 RL_DIR=./srcs/read
@@ -165,7 +165,8 @@ EX_BN_NAME=sh_cd.c \
 		sh_builtin_unsetenv.c \
 		sh_builtin_set.c \
 		sh_builtin_unset.c \
-		sh_builtin_export.c
+		sh_builtin_export.c \
+		sh_unalias.c
 FC_NAME=sh_malloc_func.c \
 		sh_strjoin_func.c \
 		sh_strs.c

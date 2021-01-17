@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/09 12:53:44 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/17 15:55:26 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main)
 	}
 	else if (ft_strcmp(exec->argv[0], "export") == 0)
 		sh_builtin_export(exec, main);
+	else if (ft_strcmp(exec->argv[0], "unalias") == 0)
+		finish = sh_builtin_unalias(exec, main);
 	return (finish);
 }

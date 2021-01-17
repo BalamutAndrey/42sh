@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/10 15:25:47 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/17 15:56:08 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,10 @@ void	sh_builtin_unset(t_exec *exec, t_main *main);
 ** sh_builtin_export.c 
 */
 void	sh_builtin_export(t_exec *exec, t_main *main);
+
+/*
+** sh_unalias.c
+*/
+char	*sh_builtin_unalias(t_exec *exec, t_main *main);
 
 #endif

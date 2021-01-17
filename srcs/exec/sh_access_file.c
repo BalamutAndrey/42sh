@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_access_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 15:35:21 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/09 12:34:08 by eboris           ###   ########.fr       */
+/*   Updated: 2021/01/17 15:36:24 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ bool	sh_is_builtin(char *str)
 		(ft_strcmp(str, "cd") == 0) ||
 		(ft_strcmp(str, "echo") == 0) ||
 		(ft_strcmp(str, "alias") == 0) ||
+		(ft_strcmp(str, "unalias") == 0) ||
 		(ft_strcmp(str, "env") == 0) ||
 		(ft_strcmp(str, "setenv") == 0) ||
 		(ft_strcmp(str, "unsetenv") == 0) ||
@@ -64,6 +65,7 @@ bool	sh_is_builtin_nofork(char *str)
 	if ((ft_strcmp(str, "cd") == 0) ||
 		(ft_strcmp(str, "exit") == 0) ||
 		(ft_strcmp(str, "alias") == 0) ||
+		(ft_strcmp(str, "unalias") == 0) ||
 		(ft_strcmp(str, "setenv") == 0) ||
 		(ft_strcmp(str, "unsetenv") == 0) ||
 		(ft_strcmp(str, "unset") == 0) ||

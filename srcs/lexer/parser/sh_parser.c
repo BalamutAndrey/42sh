@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:02:16 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/08 16:19:13 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/17 14:22:26 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,18 @@ int		sh_check_fbraces(t_main *main)
 	return (0);
 }
 
+void	sh_alias_recurs_erase(t_main *main)
+{
+	t_alias	*al;
+
+	al = main->alias;
+	while (al)
+	{
+		al->recurs = 0;
+		al = al->next;
+	}
+}
+
 void	sh_parser(t_main *main)
 {
 	int		empty;
@@ -126,6 +138,7 @@ void	sh_parser(t_main *main)
 		ft_strdel(&main->ks_res);
 		ft_strdel(&main->alias_cont);
 		main->alias_error = NULL;
+		sh_alias_recurs_erase(main);
 	}
 //	if (alias == 1 && !main->ks_tmp && main->prompt)
 //		main->ks_tmp = sh_strdup(main->ks, main);
