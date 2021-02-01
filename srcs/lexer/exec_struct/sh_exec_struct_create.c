@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 14:51:20 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/20 17:15:41 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/01 17:37:43 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void	sh_exec_struct_create(t_main *main)
 	{
 		sh_remove_exec(main);
 		main->exec_first = NULL;
+	}
+	first = main->exec_first;
+	while (first && first->next != NULL)
+		first = first->next;
+	if (first)
+	{
+		first->andif = false;
+		first->orif = false;	
 	}
 }
 

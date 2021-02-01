@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 17:15:09 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/20 17:16:25 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/01 17:28:47 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,13 @@ void	sh_exec_struct_go_left(t_main *main)
 	else if (main->tree_curr->node_type == AND_IF)
 	{
 		main->tree_curr = main->tree_curr->left;
+		main->exec_curr->andif = true;
 		sh_exec_struct_go(main, 2);
 	}
 	else if (main->tree_curr->node_type == OR_IF)
 	{
 		main->tree_curr = main->tree_curr->left;
+		main->exec_curr->orif = true;
 		sh_exec_struct_go(main, 3);
 	}
 }
