@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 17:21:51 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/29 12:58:29 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/01 18:23:43 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,10 @@ void	sh_sig_bus_error(int a);
 void	sh_sig_ctrl_c(int a);
 void	sh_sig_ctrl_c_ks(t_main *g_main);
 void	sh_new_prompt(t_main *g_main);
+
+/*
+** sh_ctrl_z.c
+*/
+void	sh_sig_ctrl_z(int a);
 
 #endif

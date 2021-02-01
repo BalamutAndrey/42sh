@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/17 15:56:08 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/01 19:02:39 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ void	sh_pwd_print_dir(t_main *main, bool param);
 /*
 ** sh_exit.c
 */
-void	sh_exit(t_main *main, uint64_t code);
+void	sh_exit(t_exec *exec, t_main *main);
+void	sh_exit_error(t_main *main);
+
 /*
 ** sh_echo.c
 */

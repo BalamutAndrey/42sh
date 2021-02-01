@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_malloc_func.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 16:43:31 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/04 16:16:00 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/01 19:02:53 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*sh_memalloc(size_t size, t_main *main)
 
 	res = malloc(size);
 	if (res == NULL)
-		sh_exit(main, 0);
+		sh_exit_error(main);
 	ft_memset(res, 0, size);
 	return (res);
 }

@@ -182,6 +182,7 @@ RM_NAME=sh_remove_envp_curr.c \
 		sh_remove_envvar.c \
 		sh_remove_alias.c
 SG_NAME=sh_ctrl_c.c \
+		sh_ctrl_z.c \
 		sh_screen_resize.c \
 		sh_signal.c
 STRUCT_NAME=sh_path.c \
