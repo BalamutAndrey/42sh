@@ -143,7 +143,8 @@ EX_NAME=sh_access_file.c \
 		sh_exec_check_vars.c \
 		sh_redirects.c \
 		sh_redirects_hub.c \
-		sh_redirects_io.c
+		sh_redirects_io.c \
+		sh_exec_andif_orif_check.c
 EX_BN_NAME=sh_cd.c \
 		sh_alias.c \
 		sh_alias_arg.c \
