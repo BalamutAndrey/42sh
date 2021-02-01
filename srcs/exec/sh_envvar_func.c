@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:48:25 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/20 16:56:39 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/01 17:42:27 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int		sh_search_condition(t_envvar *envvar, t_main *main)
 
 	type = 0;
 	tmp = sh_strsub(envvar->str, envvar->start, envvar->end - envvar->start, main);
-	if (ft_strnstr(tmp, ":-", 2))
+	if (ft_strcmp(tmp, "${?}") == 0)
+		type = -1;
+	else if (ft_strnstr(tmp, ":-", 2))
 		type = 1;
 	else if (ft_strchr(tmp, '-'))
 		type = 2;
@@ -62,6 +64,10 @@ char	*sh_env_cont_with_cond(t_envvar *envvar, t_main *main)
 	int		cond;
 
 	cond = sh_search_condition(envvar, main);
+	if (cond == -1)
+	{
+		return (NULL);
+	}
 	if (cond == 0)
 	{
 		len = envvar->end - envvar->start - 2;
@@ -111,6 +117,8 @@ char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar)
 
 	tmp = main->vars;
 	var = sh_get_envvar_from_str(envvar, main);
+	if (!var)
+		return (ft_itoa(main->ex_code));
 	while (tmp)
 	{
 		if (ft_strcmp(var, tmp->name) == 0)

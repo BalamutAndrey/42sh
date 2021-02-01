@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/01 17:10:21 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/01 19:16:19 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	sh_exec_print_error(int16_t error, t_main *main)
 		if (error == 0)
 			exit(0);
 	}
+	if (error <= 0)
+		exit(0);
 	if (error == 1)
 		ft_fprintf(STDERR_FILENO, "21sh: Access 0 error. Command not found.\n");
 	else if (error == 2)
@@ -51,6 +53,18 @@ int16_t	sh_exec_prog(t_exec *exec, t_main *main, char *err_built)
 	return (error);
 }
 
+void	sh_exit_code_check(t_exec *exec, int status)
+{
+	if (WIFEXITED(status) != 0)
+	{
+		exec->exit_s = WEXITSTATUS(status);
+	}
+	else
+	{
+		exec->exit_s = 1;
+	}
+}
+
 void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 {
 	pid_t	cpid;
@@ -74,7 +88,8 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 		{
 			main->cpid = cpid;
 			waitpid(cpid, &status, 0);
-			exec->exit_s = status;
+			sh_exit_code_check(exec, status);
+//			exec->exit_s = status;
 	//		ft_printf("status = %i\n", status);
 			main->cpid = -1;
 			ft_strdel(&err_built);
@@ -92,7 +107,7 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 	err_built = NULL;
 	redir_err = 0;
 	if (exec->pipe == true || (exec->next && exec->next->pipe == true))
-	{
+	{		
 		if (exec->redir)
 			redir_err = sh_redirects_hub(exec, main);
 		if (sh_run_access(exec->argv) == 5)
@@ -113,12 +128,13 @@ t_exec	*sh_or_if_and_if_check(t_exec *exec)
 {
 	t_exec	*tmp;
 
-	return (exec->next);
+//	return (exec->next);
 	tmp = exec;
 	if (!exec->next)
 		return (NULL);
 	if (exec->andif == false && exec->orif == false)
 		return (exec->next);
+//	ft_printf("exit_s = %i\n", exec->exit_s);
 	if (exec->andif == true)
 	{
 		if (exec->exit_s == 0)
@@ -129,11 +145,13 @@ t_exec	*sh_or_if_and_if_check(t_exec *exec)
 		{
 			while (tmp)
 			{
-				if ((tmp->next && tmp->next->andif == true) || !tmp->next)
+				if (!tmp->next)
+					return (NULL);
+				else if (tmp->andif == true)
 					tmp = tmp->next;
-				else if (tmp->next && tmp->next->andif == false && tmp->next->orif == false)
-					return (tmp->next);
-				else if (tmp->next && tmp->next->orif == true)
+//				else if (tmp->next->andif == false && tmp->next->orif == false)
+//					return (tmp->next);
+				else if (tmp->orif == true)
 					return (tmp->next);
 			}
 			return (tmp);
@@ -147,11 +165,13 @@ t_exec	*sh_or_if_and_if_check(t_exec *exec)
 		{
 			while (tmp)
 			{
-				if ((tmp->next && tmp->next->orif == true) || !tmp->next)
+				if (!tmp->next)
+					return (NULL);
+				if (tmp->orif == true)
 					tmp = tmp->next;
-				else if (tmp->next && tmp->next->andif == false && tmp->next->orif == false)
-					return (tmp->next);
-				else if (tmp->next->andif == true)
+//				else if (tmp->next && tmp->next->andif == false && tmp->next->orif == false)
+//					return (tmp->next);
+				else if (tmp->andif == true)
 					return (tmp->next);
 			}
 			return (tmp);
@@ -168,13 +188,16 @@ void	sh_exec(t_main *main, t_exec *exec)
 			sh_get_vars_from_env(main);
 //		sh_check_variables(exec, main);
 		tcsetattr(main->fd, TCSANOW, &main->t_start);
-		ft_printf("exec->&& = %i exec->|| = %i\n", exec->andif, exec->orif);
+//		ft_printf("exec->&& = %i exec->|| = %i\n", exec->andif, exec->orif);
 		if (exec->next && exec->next->pipe == true)
 		{
 			sh_exec_piped_commands(exec, main);
 			exec = exec->next;
 			while (exec && exec->pipe == true)
+			{
+				main->ex_code = exec->exit_s;
 				exec = exec->next;
+			}
 		}
 		else
 		{
@@ -182,6 +205,7 @@ void	sh_exec(t_main *main, t_exec *exec)
 				sh_check_variables(exec, main);
 			sh_change_envvars_in_exec(main, exec);
 			sh_standart_exec(exec, main);
+			main->ex_code = exec->exit_s;
 			exec = sh_or_if_and_if_check(exec);
 //			exec = exec->next;
 		}

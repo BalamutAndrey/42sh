@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_pipes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:08:03 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/20 15:55:47 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/01 18:57:03 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	sh_std_in_out_pipe(t_exec *exec, int fd[2], int fd2[2], t_main *main)
 	pid = fork();
 	if (pid == 0)
 	{
+		sh_check_variables(exec, main);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[1]);
 		dup2(fd2[1], STDOUT_FILENO);
@@ -34,6 +35,7 @@ void	sh_std_in_out_pipe(t_exec *exec, int fd[2], int fd2[2], t_main *main)
 		if (exec->next && exec->next->pipe == true)
 			sh_exec_piped_commands(exec->next, main);
 		waitpid(pid, &status, 0);
+		exec->exit_s = status;
 		main->cpid = -1;
 		sh_signal_status(status, pid);
 	}
@@ -47,6 +49,7 @@ void	sh_stdin_pipe(t_exec *exec, int fd[2], t_main *main)
 	pid = fork();
 	if (pid == 0)
 	{
+		sh_check_variables(exec, main);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[1]);
 		sh_standart_exec(exec, main);
@@ -57,6 +60,7 @@ void	sh_stdin_pipe(t_exec *exec, int fd[2], t_main *main)
 		close(fd[1]);
 		main->cpid = pid;
 		waitpid(pid, &status, 0);
+		exec->exit_s = status;
 		main->cpid = -1;
 		sh_signal_status(status, pid);
 	}
@@ -70,6 +74,7 @@ void	sh_stdout_pipe(t_exec *exec, int fd[2], t_main *main)
 	pid = fork();
 	if (pid == 0)
 	{
+		sh_check_variables(exec, main);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		sh_standart_exec(exec, main);
@@ -80,6 +85,7 @@ void	sh_stdout_pipe(t_exec *exec, int fd[2], t_main *main)
 		if (exec->next && exec->next->pipe == true)
 			sh_exec_piped_commands(exec->next, main);
 		waitpid(pid, &status, 0);
+		exec->exit_s = status;
 		main->cpid = -1;
 		sh_signal_status(status, pid);
 	}
