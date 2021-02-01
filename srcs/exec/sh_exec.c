@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/01 17:08:44 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/01 17:10:21 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,6 @@ t_exec	*sh_or_if_and_if_check(t_exec *exec)
 		}
 		else
 		{
-			while (tmp)
-			{
-				if 
-			}
 			while (tmp)
 			{
 				if ((tmp->next && tmp->next->andif == true) || !tmp->next)
