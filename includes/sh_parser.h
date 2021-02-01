@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:06:56 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/01 15:20:06 by geliz            ###   ########.fr       */
+/*   Updated: 2021/01/09 17:46:19 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 bool		sh_lexer_start(t_main *main);
 int			sh_is_str_empty(char *str);
 void		sh_parser(t_main *main);
+void		sh_alias_recurs_clear(t_alias *al);
 /*
 ** sh_parser_check_quotes.c
 */

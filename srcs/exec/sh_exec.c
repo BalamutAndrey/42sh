@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/17 20:27:13 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/01 17:08:44 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ t_exec	*sh_or_if_and_if_check(t_exec *exec)
 	tmp = exec;
 	if (!exec->next)
 		return (NULL);
-	if (exec->next->andif == false && exec->next->orif == false)
+	if (exec->andif == false && exec->orif == false)
 		return (exec->next);
-	if (exec->next->andif == true)
+	if (exec->andif == true)
 	{
 		if (exec->exit_s == 0)
 		{
@@ -127,6 +127,10 @@ t_exec	*sh_or_if_and_if_check(t_exec *exec)
 		}
 		else
 		{
+			while (tmp)
+			{
+				if 
+			}
 			while (tmp)
 			{
 				if ((tmp->next && tmp->next->andif == true) || !tmp->next)
@@ -139,7 +143,7 @@ t_exec	*sh_or_if_and_if_check(t_exec *exec)
 			return (tmp);
 		}
 	}
-	if (exec->next->orif == true)
+	if (exec->orif == true)
 	{
 		if (exec->exit_s != 0)
 			return (exec->next);
@@ -168,7 +172,7 @@ void	sh_exec(t_main *main, t_exec *exec)
 			sh_get_vars_from_env(main);
 //		sh_check_variables(exec, main);
 		tcsetattr(main->fd, TCSANOW, &main->t_start);
-//		ft_printf("exec->&& = %i exec->|| = %i\n", exec->andif, exec->orif);
+		ft_printf("exec->&& = %i exec->|| = %i\n", exec->andif, exec->orif);
 		if (exec->next && exec->next->pipe == true)
 		{
 			sh_exec_piped_commands(exec, main);
