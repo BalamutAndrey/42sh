@@ -115,9 +115,10 @@ void	sh_parser(t_main *main)
 	}*/
 //	ft_printf("main->ks = %s\nmain->ks_res = %s\n", main->ks, main->ks_res);
 	if (!main->prompt && !main->heredoc)
-		sh_check_quotes(main);
-	if (!main->prompt && !main->heredoc)
 		sh_check_slash(main);
+	if (!main->prompt && !main->heredoc)
+		sh_check_quotes(main);
+
 	if (!main->prompt && !main->heredoc)
 		sh_check_pipe(main);
 	if (!main->prompt && !main->heredoc)

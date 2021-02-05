@@ -12,6 +12,36 @@
 
 #include "sh_main.h"
 
+int		sh_check_slash_is_quoted(char *str)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"' && count % 2 == 0 && sh_is_protected(str, i) == 0)
+		{
+			while (str[i])
+			{
+				if (str[i] == '\"' && sh_is_protected(str, i))
+					break;
+				i++;
+			}
+		}
+		else if (str[i] == '\'' && count % 2 == 0 && sh_is_protected(str, i) == 0)
+			count++;
+		else if (str[i] == '\'' && count % 2 != 0)
+			count++;
+		i++;
+	}
+	if (count % 2 == 0)
+		return (0);
+	else
+		return (1);
+}
+
 void	sh_check_slash(t_main *main)
 {
 	int		i;
@@ -26,6 +56,6 @@ void	sh_check_slash(t_main *main)
 		j--;
 		i++;
 	}
-	if (i % 2 != 0)
+	if (i % 2 != 0 && sh_check_slash_is_quoted(str) == 0)
 		main->prompt = sh_strdup("slash", main);
 }

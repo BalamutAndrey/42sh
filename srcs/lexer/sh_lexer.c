@@ -22,9 +22,12 @@ int		sh_is_whitespace_or_tab(char c)
 
 int		sh_find_end_of_token(int i, char *str)
 {
-	while (str[i] != '\0' && str[i] != '\n' && (sh_is_whitespace_or_tab(str[i]) == 0) && !sh_is_operator(&str[i]))
+	while (str[i] != '\0' && str[i] != '\n' &&
+		(sh_is_whitespace_or_tab(str[i]) == 0))
 	{
-		if (str[i] == '\'' && (i == 0 || sh_is_protected(str, i) == 0))
+		if (sh_is_operator(&str[i]) != 0 && sh_is_protected(str, i) == 0)
+			return (i);
+		else if (str[i] == '\'' && (i == 0 || sh_is_protected(str, i) == 0))
 			i = sh_find_closing_single_quotes(i, str);
 		else if (str[i] == '"' && (i == 0 || sh_is_protected(str, i) == 0))
 			i = sh_find_closing_double_quotes(i, str);
