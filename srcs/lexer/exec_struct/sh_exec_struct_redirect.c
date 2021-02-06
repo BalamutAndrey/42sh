@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_struct_redirect.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.42.fr>              +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 15:55:23 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 15:11:18 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/06 17:06:42 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_redirect	*sh_exec_struct_redirect_new(t_main *main)
 	new->envvar_first = NULL;
 	new->envvar_curr = NULL;
 	new->error = 0;
+	new->st_out = true;
 	return (new);
 }
 

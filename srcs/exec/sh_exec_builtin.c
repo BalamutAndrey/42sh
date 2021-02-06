@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/01 18:57:23 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/06 17:27:08 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@
 // 	}
 // }
 
+void	sh_exec_check_stout(t_exec *exec)
+{
+	t_redirect	*tmp;
+	char		*ret;
+
+	tmp = exec->redir;
+	while (tmp)
+	{
+		if (tmp->st_out == false)
+			exit(1);
+		tmp = tmp->next;
+	}
+}
+
 char	*sh_exec_builtin(t_exec *exec, t_main *main)
 {
 	char	*finish;
@@ -45,7 +59,10 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main)
 	else if (ft_strcmp(exec->argv[0], "pwd") == 0)
 		sh_pwd(exec, main);
 	else if (ft_strcmp(exec->argv[0], "echo") == 0)
+	{
+		sh_exec_check_stout(exec);
 		sh_builtin_echo(main, exec);
+	}
 	else if (ft_strcmp(exec->argv[0], "exit") == 0)
 		sh_exit(exec, main);
 	else if (ft_strcmp(exec->argv[0], "alias") == 0)

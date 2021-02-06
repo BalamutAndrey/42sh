@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/01 17:29:36 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/06 17:06:48 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct			s_redirect {
 	t_envvar			*envvar_first;
 	t_envvar			*envvar_curr;
 	int					error;
+	bool				st_out;
 	struct s_redirect	*next;
 }						t_redirect;
 
