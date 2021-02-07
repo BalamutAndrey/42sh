@@ -6,12 +6,21 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:00 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/01 20:21:01 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/07 18:00:32 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_EXEC_H
 # define SH_EXEC_H
+
+enum					e_jobstatus
+{
+	RUNNING,
+	STOPPED,
+	SIGNALED,
+	ERROR,
+	DONE
+};
 
 /*
 ** sh_exec.c
@@ -113,5 +122,10 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main);
 t_exec	*sh_or_if_and_if_check(t_exec *exec);
 t_exec	*sh_andif_check(t_exec *exec);
 t_exec	*sh_orif_check(t_exec *exec);
+
+void		sh_exec_job_state(t_jobs *job);
+void	sh_exec_job_del_completed(t_main *main);
+void	sh_exec_job_print_completed(t_main *main);
+void	sh_exec_jobs_put_signes(t_main *main);
 
 #endif

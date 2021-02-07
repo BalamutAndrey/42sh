@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_exec_struct_new.c                               :+:      :+:    :+:   */
+/*   sh_builtin_fg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:38:39 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/06 18:19:13 by geliz            ###   ########.fr       */
+/*   Created: 2021/02/07 17:53:34 by geliz             #+#    #+#             */
+/*   Updated: 2021/02/07 17:54:08 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
-t_exec	*sh_exec_struct_new(t_main *main)
+void	sh_builtin_fg(t_exec *exec, t_main *main)
 {
-	t_exec	*new;
-
-	new = sh_memalloc(sizeof(t_exec), main);
-	new->argv = NULL;
-	new->redir = NULL;
-	new->pipe = false;
-	new->andif = false;
-	new->orif = false;
-	new->bg = false;
-	new->pipefd[0] = STDIN_FILENO;
-	new->pipefd[1] = STDOUT_FILENO;
-	new->envvar = NULL;
-	new->envvar_first = NULL;
-	new->envvar_curr = NULL;
-	new->vars = NULL;
-	new->next = NULL;
-	return (new);
+	return ;
 }

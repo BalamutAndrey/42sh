@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 15:58:27 by eboris            #+#    #+#             */
-/*   Updated: 2020/12/19 10:36:11 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/06 21:43:23 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ t_main	*g_main;
 // 	main->alias_end = end;
 // }
 
+void	tmp_term_init(t_main *main)
+{
+	pid_t	pid;
+	
+	pid = getpid();
+	setpgid(pid, pid);
+	tcsetpgrp(STDOUT_FILENO, pid);
+	tcgetattr(STDOUT_FILENO, &main->t_start);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_main			*main;
@@ -45,6 +55,7 @@ int	main(int argc, char **argv, char **env)
 	if (sh_term_check_errors_start(argc, argv, env))
 		exit(0);
 	sh_term_init(main);
+	tmp_term_init(main);
 	sh_signal_set();
 	sh_copy_envp(main);
 	sh_path(main);

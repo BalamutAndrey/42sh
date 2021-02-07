@@ -6,11 +6,24 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 11:33:48 by eboris            #+#    #+#             */
-/*   Updated: 2020/11/08 15:34:31 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:37:54 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
+
+void	tmp_erm_func(t_main *main)
+{
+	while (tcgetpgrp(STDOUT_FILENO) != (main->pid = getpgrp()))
+		kill(-main->pid, SIGTTIN);
+	main->pid = getpid();
+	if (setpgid(main->pid, main->pid) < 0)
+		ft_fprintf(2, "Couldn't put shell in its own process group");
+	if (tcsetpgrp(STDOUT_FILENO, main->pid) == -1)
+		ft_fprintf(2, "Couldn't get control of terminal");
+	if (tcgetattr(STDOUT_FILENO, &main->t_curr) == -1)
+		ft_fprintf(2, "Failed to save terminal original state");
+}
 
 bool	sh_term_init(t_main *main)
 {
@@ -27,6 +40,7 @@ bool	sh_term_init(t_main *main)
 	main->t_curr.c_cc[VTIME] = 0;
 	if (tcsetattr(main->fd, TCSANOW, &main->t_curr) == -1)
 		sh_error_init(4, main);
+	tmp_erm_func(main);
 	ft_putstr_fd(tgetstr("cl", NULL), main->fd);
 	ft_putstr_fd(tgetstr("ti", NULL), main->fd);
 	ft_putstr_fd(tgetstr("vs", NULL), main->fd);

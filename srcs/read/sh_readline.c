@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 16:16:02 by eboris            #+#    #+#             */
-/*   Updated: 2020/10/17 16:22:40 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/07 18:18:16 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	sh_readline(t_main *main)
 			fin = sh_readline_readkey(main);
 		}
 		fin = sh_readline_end(main);
+		sh_exec_job_state(main->jobs);
+		sh_exec_job_print_completed(main);
+		sh_exec_job_del_completed(main);
+		tcsetattr(main->fd, TCSANOW, &main->t_curr);
 	}
 }
 

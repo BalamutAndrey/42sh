@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 11:47:56 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/01 17:29:10 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/06 18:40:51 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	sh_struct_set_default_values(t_main *new)
 	new->alias_cont = NULL;
 	new->alias_error = NULL;
 	new->ex_code = 0;
+	new->jobs = NULL;
+	new->pid = getpid();
 }
 
 t_main	*sh_add_main_struct(char **env)

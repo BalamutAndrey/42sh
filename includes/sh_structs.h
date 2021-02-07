@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/06 17:06:48 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/06 19:17:35 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct			s_exec {
 	bool				pipe;
 	bool				andif;
 	bool				orif;
-	bool				ampersand;
+	bool				bg;
 	int					pipefd[2];
 	t_envvar			*envvar;
 	t_envvar			*envvar_first;
@@ -147,8 +147,13 @@ typedef struct			s_vars {
 }						t_vars;
 
 typedef struct			s_jobs {
-	char				**name;
-
+	int					num;
+	char				sign;
+	pid_t				pid;
+	char				*cmd;
+	int					state;
+	int					status;
+	struct s_jobs		*next;
 }						t_jobs;
 
 typedef struct			s_main
@@ -200,6 +205,8 @@ typedef struct			s_main
 	char				*alias_cont;
 	char				*alias_error;
 	int					ex_code;
+	pid_t				pid;
+	t_jobs				*jobs;
 }						t_main;
 
 /*

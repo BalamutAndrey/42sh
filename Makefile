@@ -167,7 +167,9 @@ EX_BN_NAME=sh_cd.c \
 		sh_builtin_set.c \
 		sh_builtin_unset.c \
 		sh_builtin_export.c \
-		sh_unalias.c
+		sh_unalias.c \
+		sh_builtin_jobs.c \
+		sh_builtin_fg.c
 FC_NAME=sh_malloc_func.c \
 		sh_strjoin_func.c \
 		sh_strs.c

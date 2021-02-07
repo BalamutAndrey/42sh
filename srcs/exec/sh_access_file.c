@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 15:35:21 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/17 15:36:24 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/07 18:12:48 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ bool	sh_is_builtin(char *str)
 		(ft_strcmp(str, "type") == 0) ||
 		(ft_strcmp(str, "set") == 0) ||
 		(ft_strcmp(str, "unset") == 0) ||
+		(ft_strcmp(str, "jobs") == 0) ||
+		(ft_strcmp(str, "fg") == 0) ||
 		(ft_strcmp(str, "export") == 0))
 	{
 		return (true);
@@ -69,6 +71,8 @@ bool	sh_is_builtin_nofork(char *str)
 		(ft_strcmp(str, "setenv") == 0) ||
 		(ft_strcmp(str, "unsetenv") == 0) ||
 		(ft_strcmp(str, "unset") == 0) ||
+		(ft_strcmp(str, "fg") == 0) ||
+		(ft_strcmp(str, "jobs") == 0) ||		
 		(ft_strcmp(str, "export") == 0))
 	{
 		return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/01 19:02:39 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/07 17:54:49 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,15 @@ void	sh_builtin_export(t_exec *exec, t_main *main);
 ** sh_unalias.c
 */
 char	*sh_builtin_unalias(t_exec *exec, t_main *main);
+
+/*
+** sh_builtin_jobs.c
+*/
+void	sh_builtin_jobs(t_exec *exec, t_main *main);
+
+/*
+** sh_builtin_fg.c
+*/
+void	sh_builtin_fg(t_exec *exec, t_main *main);
 
 #endif
