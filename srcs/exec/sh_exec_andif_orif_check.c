@@ -6,11 +6,23 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 20:20:13 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/01 20:21:44 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/08 22:50:22 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh_main.h>
+
+void	sh_exit_code_check(t_exec *exec, int status)
+{
+	if (WIFEXITED(status) != 0)
+	{
+		exec->exit_s = WEXITSTATUS(status);
+	}
+	else
+	{
+		exec->exit_s = 1;
+	}
+}
 
 t_exec	*sh_orif_check(t_exec *exec)
 {

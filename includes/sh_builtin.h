@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 16:20:13 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/07 17:54:49 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:14:45 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,6 @@ void	sh_builtin_jobs(t_exec *exec, t_main *main);
 /*
 ** sh_builtin_fg.c
 */
-void	sh_builtin_fg(t_exec *exec, t_main *main);
+char	*sh_builtin_fg(t_exec *exec, t_main *main);
 
 #endif

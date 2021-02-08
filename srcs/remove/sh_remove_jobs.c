@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_fg.c                                            :+:      :+:    :+:   */
+/*   sh_remove_jobs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/01 18:47:11 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/01 18:49:25 by eboris           ###   ########.fr       */
+/*   Created: 2021/02/09 00:38:27 by geliz             #+#    #+#             */
+/*   Updated: 2021/02/09 00:41:22 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
-void	sf_fg_resume(t_main *main, int32_t pid)
+void    sh_remove_jobs(t_main *main)
 {
-	tcsetattr(main->fd, TCSANOW, &main->t_start);
-	kill(pid, SIGCONT);
-	main->cpid = pid;
+    t_jobs  *tmp;
+    t_jobs  *nxt;
+
+    tmp = main->jobs;
+    while (tmp)
+    {
+        nxt = tmp->next;
+        sh_job_remove(tmp);
+        tmp = nxt;
+    }
+    main->jobs = NULL;
 }

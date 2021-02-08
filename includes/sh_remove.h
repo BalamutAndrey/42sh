@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:57:04 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/08 14:18:44 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:42:18 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,10 @@ void	sh_remove_vars(t_main *main);
 ** sh_remove_alias.c
 */
 void	sh_remove_alias(t_main *temp);
+
+/*
+** sh_remove_jobs.c
+*/
+void    sh_remove_jobs(t_main *main);
 
 #endif

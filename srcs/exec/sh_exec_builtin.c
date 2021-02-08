@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/07 17:54:11 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:15:22 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main)
 	else if (ft_strcmp(exec->argv[0], "jobs") == 0)
 		sh_builtin_jobs(exec, main);
 	else if (ft_strcmp(exec->argv[0], "fg") == 0)
-		sh_builtin_fg(exec, main);
+		finish = sh_builtin_fg(exec, main);
 	return (finish);
 }

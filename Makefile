@@ -144,7 +144,12 @@ EX_NAME=sh_access_file.c \
 		sh_redirects.c \
 		sh_redirects_hub.c \
 		sh_redirects_io.c \
-		sh_exec_andif_orif_check.c
+		sh_exec_andif_orif_check.c \
+		sh_jobs_print.c \
+		sh_jobs.c \
+		sh_jobs_state.c \
+		sh_jobs_signal_pc.c \
+		sh_jobs_funcs.c
 EX_BN_NAME=sh_cd.c \
 		sh_alias.c \
 		sh_alias_arg.c \
@@ -183,7 +188,8 @@ RM_NAME=sh_remove_envp_curr.c \
 		sh_remove_token.c \
 		sh_remove_tree.c \
 		sh_remove_envvar.c \
-		sh_remove_alias.c
+		sh_remove_alias.c \
+		sh_remove_jobs.c
 SG_NAME=sh_ctrl_c.c \
 		sh_ctrl_z.c \
 		sh_screen_resize.c \

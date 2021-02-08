@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:00 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/07 18:00:32 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/08 23:44:06 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,44 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main);
 t_exec	*sh_or_if_and_if_check(t_exec *exec);
 t_exec	*sh_andif_check(t_exec *exec);
 t_exec	*sh_orif_check(t_exec *exec);
+void	sh_exit_code_check(t_exec *exec, int status);
 
-void		sh_exec_job_state(t_jobs *job);
-void	sh_exec_job_del_completed(t_main *main);
-void	sh_exec_job_print_completed(t_main *main);
+/*
+** sh_jobs_funcs.c
+*/
+void	sh_job_remove(t_jobs *job);
+t_jobs	*sh_exec_new_job(pid_t pid, char *cmd, t_main *main);
+char	*sh_exec_job_get_cmd(char **argv, t_main *main);
 void	sh_exec_jobs_put_signes(t_main *main);
+void	sh_exec_setpgid(bool bg, t_main *main);
+
+/*
+** sh_jobs_signal_pc.c
+*/
+void	sh_signal_parrent(t_main *main);
+void	sh_signal_child(void);
+
+/*
+** sh_jobs_state.c
+*/
+void	sh_exec_job_state_assign(t_jobs *job, int state, int status);
+void	sh_exec_job_state_check(t_jobs *job);
+void	sh_exec_job_state(t_jobs *job);
+void	sh_jobs_check_not_first(t_jobs *j);
+void	sh_exec_job_del_completed(t_main *main);
+/*
+** sh_jobs.c
+*/
+void	sh_exec_add_job(t_main *main, t_jobs *job);
+void	sh_exec_remove_job(t_main *main, t_jobs *job);
+int		sh_exec_find_job(t_main *main, t_jobs *job);
+int		sh_exec_wait(t_jobs *job, t_main *main, t_exec *exec);
+int		sh_exec_job(t_main *main, t_exec *exec);
+
+/*
+** sh_jobs_print.c
+*/
+void	sh_exec_job_print_completed(t_main *main);
+
 
 #endif
