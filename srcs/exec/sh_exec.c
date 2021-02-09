@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/09 00:32:32 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/10 01:25:27 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,15 @@ void	sh_exec(t_main *main, t_exec *exec)
 {
 	while (exec)
 	{
-		if (exec->bg == false)//DELETE THIS PART! ONLY FOR TEST WHILE TREE NOT WORKIN
-		{
-			if (ft_strcmp(exec->argv[0], "jobs") == 0)
-				exec->bg = false;
-			else if (ft_strcmp(exec->argv[0], "fg") == 0)
-				exec->bg = false;
-			else
-				exec->bg = true;
-		}
+		// if (exec->bg == false)//DELETE THIS PART! ONLY FOR TEST WHILE TREE NOT WORKIN
+		// {
+		// 	if (ft_strcmp(exec->argv[0], "jobs") == 0)
+		// 		exec->bg = false;
+		// 	else if (ft_strcmp(exec->argv[0], "fg") == 0)
+		// 		exec->bg = false;
+		// 	else
+		// 		exec->bg = true;
+		// }
 		if (!main->vars)
 			sh_get_vars_from_env(main);
 		sh_signal_parrent(main);
