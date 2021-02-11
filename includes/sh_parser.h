@@ -62,4 +62,12 @@ int			sh_heredoc_dslashes_remove(int i, int end, t_heredoc *here,
 */
 void		sh_check_pipe(t_main *main);
 
+/*
+** sh_parser_funcs.c
+*/
+void	sh_alias_recurs_erase(t_main *main);
+int		sh_check_fbraces(t_main *main);
+int		sh_is_str_empty(char *str);
+int		sh_is_it_protected(char *str);
+
 #endif

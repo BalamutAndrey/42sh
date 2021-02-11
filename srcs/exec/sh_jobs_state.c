@@ -12,16 +12,15 @@
 
 #include "sh_main.h"
 
-
 void	sh_exec_job_state_assign(t_jobs *job, int state, int status)
 {
 	job->state = state;
 	job->status = status;
 }
 
-void		sh_exec_job_state_check(t_jobs *job)
+void	sh_exec_job_state_check(t_jobs *job)
 {
-	pid_t 	ret;
+	pid_t	ret;
 	int		status;
 
 	ret = 0;
@@ -42,7 +41,7 @@ void		sh_exec_job_state_check(t_jobs *job)
 		sh_exec_job_state_assign(job, RUNNING, 0);
 }
 
-void		sh_exec_job_state(t_jobs *job)
+void	sh_exec_job_state(t_jobs *job)
 {
 	while (job)
 	{
@@ -90,21 +89,5 @@ void	sh_exec_job_del_completed(t_main *main)
 	else
 	{
 		sh_jobs_check_not_first(j);
-/*		prev = j;
-		j = j->next;
-		while (j)
-		{
-			if (j->state == DONE)
-			{
-				prev->next = j->next;
-				sh_job_remove(j);
-				j = prev->next;
-			}
-			else
-			{
-				prev = j;
-				j = j->next;
-			}
-		}*/
 	}
 }

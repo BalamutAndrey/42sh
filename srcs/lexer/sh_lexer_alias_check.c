@@ -34,13 +34,9 @@ void	sh_lexer_alias_change(t_main *main)
 			ret = sh_strjoin_arg(main, "%f %s", ret, "\n");
 		else
 			ret = sh_strjoin_arg(main, "%f %s %s", ret, " ", main_tok->content);
-	//	if (main_tok->type != NEWLINE)
-	//		ret = sh_strjoin_arg(main, "%f %s %s", ret, " ", main_tok->content);
 		main_tok = main_tok->next;
 	}
 	main->ks_res = ret;
-//	ft_printf("here = %s\n", main->ks_res);
-	//зачистить всё, токены и енввары и прочая -- 0501 ????
 }
 
 int		sh_lexer_alias_selection(t_main *main, t_token *tok)

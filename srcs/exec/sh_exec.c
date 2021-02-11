@@ -57,7 +57,6 @@ int16_t	sh_exec_prog(t_exec *exec, t_main *main, char *err_built)
 	return (error);
 }
 
-
 void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 {
 	pid_t	cpid;
@@ -71,23 +70,16 @@ void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
 		cpid = fork();
 		if (cpid == 0)
 		{
-//		sh_exec_setpgid(exec->bg, main);
-//			ft_printf("CPID = %i\n", getpid());
 			if (exec->redir)
 				r_err = sh_redirects_hub(exec, main);
-			if (r_err >= 0 && (((err = sh_exec_prog(exec, main, err_built)) != 0) ||
-				main->alias_cont))
+			if (r_err >= 0 && (((err = sh_exec_prog(exec, main,
+					err_built)) != 0) || main->alias_cont))
 				sh_exec_print_error(err, main);
 		}
 		else
 		{
 			main->cpid = cpid;
-//			setpgid(0, 0);
 			status = sh_exec_job(main, exec);
-//			waitpid(cpid, &status, 0);
-//			sh_exit_code_check(exec, status);
-//			main->cpid = -1;
-
 			ft_strdel(&err_built);
 //			sh_signal_status(status, cpid);
 		}
@@ -103,7 +95,7 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 	err_built = NULL;
 	redir_err = 0;
 	if (exec->pipe == true || (exec->next && exec->next->pipe == true))
-	{		
+	{
 		if (exec->redir)
 			redir_err = sh_redirects_hub(exec, main);
 		if (sh_run_access(exec->argv) == 5)
@@ -119,37 +111,19 @@ void	sh_standart_exec(t_exec *exec, t_main *main)
 		sh_exec_standart_fork(exec, main, err_built);
 	}
 }
-/*
-NEW FILE
-*/
-
 
 void	sh_exec(t_main *main, t_exec *exec)
 {
 	while (exec)
 	{
-		// if (exec->bg == false)//DELETE THIS PART! ONLY FOR TEST WHILE TREE NOT WORKIN
-		// {
-		// 	if (ft_strcmp(exec->argv[0], "jobs") == 0)
-		// 		exec->bg = false;
-		// 	else if (ft_strcmp(exec->argv[0], "fg") == 0)
-		// 		exec->bg = false;
-		// 	else
-		// 		exec->bg = true;
-		// }
 		if (!main->vars)
 			sh_get_vars_from_env(main);
 		sh_signal_parrent(main);
-//		tcsetattr(main->fd, TCSANOW, &main->t_curr);
 		if (exec->next && exec->next->pipe == true)
 		{
 			sh_exec_piped_commands(exec, main);
 			exec = exec->next;
-			while (exec && exec->pipe == true)
-			{
-				main->ex_code = exec->exit_s;
-				exec = exec->next;
-			}
+			sh_exec_set_pipes_exit_s(exec, main);
 		}
 		else
 		{
@@ -163,7 +137,5 @@ void	sh_exec(t_main *main, t_exec *exec)
 		tcsetpgrp(STDOUT_FILENO, main->pid);
 		tcsetattr(STDOUT_FILENO, TCSADRAIN, &main->t_curr);
 	}
-	sh_exec_job_state(main->jobs);
-	sh_exec_job_print_completed(main);
-	sh_exec_job_del_completed(main);
+	sh_exec_jobs_fin(main);
 }

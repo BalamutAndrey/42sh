@@ -12,13 +12,26 @@
 
 #include "sh_main.h"
 
-char	*sh_env_apply_condition(t_envvar *envvar, int cond, t_main *main)
+int		sh_search_condition_more(char *tmp)
 {
-	(void)envvar;
-	(void)main;
-	cond = 0;
-	return (NULL);
+	int		type;
+
+	type = 0;
+	if (ft_strnstr(tmp, ":+", 2))
+		type = 7;
+	else if (ft_strchr(tmp, '+'))
+		type = 8;
+	else if (ft_strnstr(tmp , "##", 2))
+		type = 9;
+	else if (ft_strchr(tmp, '#'))
+		type = 10;
+	else if (ft_strnstr(tmp, "%%", 2))
+		type = 11;
+	else if (ft_strchr(tmp, '%'))
+		type = 12;
+	return (type);
 }
+
 
 int		sh_search_condition(t_envvar *envvar, t_main *main)
 {
@@ -41,18 +54,8 @@ int		sh_search_condition(t_envvar *envvar, t_main *main)
 		type = 5;
 	else if (ft_strchr(tmp, '?'))
 		type = 6;
-	else if (ft_strnstr(tmp, ":+", 2))
-		type = 7;
-	else if (ft_strchr(tmp, '+'))
-		type = 8;
-	else if (ft_strnstr(tmp , "##", 2))
-		type = 9;
-	else if (ft_strchr(tmp, '#'))
-		type = 10;
-	else if (ft_strnstr(tmp, "%%", 2))
-		type = 11;
-	else if (ft_strchr(tmp, '%'))
-		type = 12;
+	else
+		type = sh_search_condition_more(tmp);
 	ft_strdel(&tmp);
 	return (type);
 }
@@ -76,7 +79,7 @@ char	*sh_env_cont_with_cond(t_envvar *envvar, t_main *main)
 	}
 	else
 	{
-		var = sh_env_apply_condition(envvar, cond, main);
+		var = NULL;
 	}
 	return (var);
 }

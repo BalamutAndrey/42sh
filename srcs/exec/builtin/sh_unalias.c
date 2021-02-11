@@ -20,7 +20,7 @@ void	sh_unalias_one_delete_cont(t_alias *al)
 	free(al);
 }
 
-int    sh_unalias_one(char *str, t_main *main)
+int		sh_unalias_one(char *str, t_main *main)
 {
 	t_alias *al;
 	t_alias *prev;
@@ -64,8 +64,8 @@ char	*sh_builtin_unalias(t_exec *exec, t_main *main)
 		while (exec->argv[i])
 		{
 			if (sh_unalias_one(exec->argv[i], main) == 0)
-				ret = sh_strjoin_arg(main, "%f %s %s %s", ret, "42sh: unalias: ",
-				exec->argv[i], " :not found\n");
+				ret = sh_strjoin_arg(main, "%f %s %s %s", ret,
+				"42sh: unalias: ", exec->argv[i], " :not found\n");
 			i++;
 		}
 	}

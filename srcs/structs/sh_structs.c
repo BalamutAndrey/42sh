@@ -33,6 +33,7 @@ void	sh_struct_set_default_values(t_main *new)
 	new->ex_code = 0;
 	new->jobs = NULL;
 	new->pid = getpid();
+	new->bg = false;
 }
 
 t_main	*sh_add_main_struct(char **env)

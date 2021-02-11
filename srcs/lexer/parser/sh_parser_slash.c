@@ -26,20 +26,19 @@ int		sh_check_slash_is_quoted(char *str)
 			while (str[i])
 			{
 				if (str[i] == '\"' && sh_is_protected(str, i))
-					break;
+					break ;
 				i++;
 			}
 		}
-		else if (str[i] == '\'' && count % 2 == 0 && sh_is_protected(str, i) == 0)
+		else if (str[i] == '\'' && count % 2 == 0 &&
+			sh_is_protected(str, i) == 0)
 			count++;
 		else if (str[i] == '\'' && count % 2 != 0)
 			count++;
 		i++;
 	}
-	if (count % 2 == 0)
-		return (0);
-	else
-		return (1);
+	i = count % 2 == 0 ? 0 : 1;
+	return (i);
 }
 
 void	sh_check_slash(t_main *main)

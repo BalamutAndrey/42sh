@@ -207,6 +207,7 @@ typedef struct			s_main
 	int					ex_code;
 	pid_t				pid;
 	t_jobs				*jobs;
+	bool				bg;
 }						t_main;
 
 /*

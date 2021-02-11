@@ -36,10 +36,6 @@ void	sh_count_quotes(t_main *main, int cq[2])
 	}
 }
 
-/*
-** cq == count quotes ; cq[0] - single quotes ; cq[1] - double quotes
-*/
-
 void	sh_check_quotes(t_main *main)
 {
 	int		cq[2];
@@ -54,44 +50,3 @@ void	sh_check_quotes(t_main *main)
 	else
 		ft_strdel(&main->prompt);
 }
-/*
-void	sh_check_dquotes(t_main *main)
-{
-	int		count;
-	char	*str;
-	int		i;
-
-	count = 0;
-	str = main->ks;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i])
-	}
-}
-
-void	sh_check_squotes(t_main *main)
-{
-	int		count;
-	char	*str;
-	int		i;
-
-	count = 0;
-	str = main->ks;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\"' && (count % 2 == 0) && sh_is_protected(str, i) == 0)
-			return ;
-		else if (str[i] == '\'')
-		{
-			if ((count % 2 == 0 && sh_is_protected(str, i) == 0) || count % 2 != 0)
-				count++;
-		}
-		i++;
-	}
-	if (count % 2 != 0)
-		main->prompt = sh_strdup("squote", main);
-	else
-		ft_strdel(&main->prompt);
-}*/

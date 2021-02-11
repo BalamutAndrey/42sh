@@ -28,7 +28,7 @@ void	sh_find_and_remove_quotes(t_main *main, t_token *token)
 		else if (token->content[i] == '$' &&
 		sh_is_protected(token->content, i) == 0)
 			i = sh_add_envvar(1, i, main, token);
-		else if (token->content[i] == '\\') // удаляет идущие перед кавычками символы \\ таким образом одна из кавычек получается защищенной. думать надо. 
+		else if (token->content[i] == '\\')
 		{
 			sh_remove_char(i, token, main);
 			i++;

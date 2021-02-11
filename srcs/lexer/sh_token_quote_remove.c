@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_token_quote_remove.c                            :+:      :+:    :+:   */
+/*   sh_t_quote_remove.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,13 @@
 
 #include "sh_main.h"
 
-int		sh_dslashes_remove(int i, int end, t_token *token, t_main *main)
+int		sh_dslashes_remove(int i, int end, t_token *t, t_main *main)
 {
 	while (i < end)
 	{
-		if (token->content[i] == '\\' && token->content[i + 1] == '\\')
+		if (t->content[i] == '\\' && t->content[i + 1] == '\\')
 		{
-			sh_remove_char(i, token, main);
+			sh_remove_char(i, t, main);
 			end--;
 		}
 		i++;
@@ -26,56 +26,40 @@ int		sh_dslashes_remove(int i, int end, t_token *token, t_main *main)
 	return (end);
 }
 
-int		sh_dquotes_remove(t_token *token, int i, t_main *main)
+int		sh_dquotes_remove(t_token *t, int i, t_main *main)
 {
 	int		tmp;
 
 	tmp = i;
-	sh_remove_char(i, token, main);
-	while (token->content[i] != '\0')
+	sh_remove_char(i, t, main);
+	while (t->content[i] != '\0')
 	{
-		if (token->content[i] == '\\' &&
-			(token->content[i + 1] == '\"' || token->content[i + 1] == '$') &&
-			sh_is_protected(token->content, i) == 0)
+		if (t->content[i] == '\\' &&
+			(t->content[i + 1] == '\"' || t->content[i + 1] == '$') &&
+			sh_is_protected(t->content, i) == 0)
 		{
-			sh_remove_char(i, token, main);
+			sh_remove_char(i, t, main);
 			i++;
 		}
-		else if (token->content[i] == '$' &&
-			sh_is_protected(token->content, i) == 0 &&
-			(ft_isalpha(token->content[i + 1]) == 1 || token->content[i + 1] == '{'))
-			i = sh_add_envvar(1, i, main, token);
-		else if (token->content[i] == '\"' && sh_is_protected(token->content, i) == 0)
+		else if (t->content[i] == '$' &&
+			sh_is_protected(t->content, i) == 0 &&
+			(ft_isalpha(t->content[i + 1]) == 1 || t->content[i + 1] == '{'))
+			i = sh_add_envvar(1, i, main, t);
+		else if (t->content[i] == '\"' && sh_is_protected(t->content, i) == 0)
 			break ;
 		else
 			i++;
 	}
-/*	while (token->content[i] != '\"' || sh_is_protected(token->content, i) == 1)
-	{
-		if (token->content[i] == '\\' &&
-			(token->content[i + 1] == '\"' || token->content[i + 1] == '$') &&
-			sh_is_protected(token->content, i) == 0)
-		{
-			sh_remove_char(i, token, main);
-			i++;
-		}
-		else if (token->content[i] == '$' &&
-			sh_is_protected(token->content, i) == 0 &&
-			ft_isalpha(token->content[i + 1]) == 1)
-			i = sh_add_envvar(1, i, main, token);
-		else
-			i++;
-	}*/
-	sh_remove_char(i, token, main);
-	i = sh_dslashes_remove(tmp, i, token, main);
+	sh_remove_char(i, t, main);
+	i = sh_dslashes_remove(tmp, i, t, main);
 	return (i);
 }
 
-int		sh_squotes_remove(t_token *token, int i, t_main *main)
+int		sh_squotes_remove(t_token *t, int i, t_main *main)
 {
-	sh_remove_char(i, token, main);
-	while (token->content[i] != '\'')
+	sh_remove_char(i, t, main);
+	while (t->content[i] != '\'')
 		i++;
-	sh_remove_char(i, token, main);
+	sh_remove_char(i, t, main);
 	return (i);
 }

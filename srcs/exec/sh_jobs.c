@@ -111,8 +111,6 @@ int		sh_exec_job(t_main *main, t_exec *exec)
 	status = 0;
 	if (exec->bg == 0)
 	{
-//		waitpid(job->pid, &status, WUNTRACED);
-//		ft_printf("Should not be here\n");
 		status = sh_exec_wait(job, main, exec);
 		tcsetpgrp(STDOUT_FILENO, main->pid);
 		tcsetattr(STDOUT_FILENO, TCSADRAIN, &main->t_curr);

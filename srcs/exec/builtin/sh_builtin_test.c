@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "sh_main.h"
+
 //  ,  1,  2,  3,  4,  5,  6,  7,  8, 9,  10, 11, 12, 13, 14, 15, 16, 17,  18,  19,  20,  21,  22
 // !, -b, -c, -d, -e, -f, -g, -L, -p, -r, -S, -s, -u, -w, -x, -z,  =, !=, -eq, -ne, -ge, -lt, -le
 
@@ -33,7 +34,7 @@ int		sh_builtin_test_more_un_op(char c)
 	else if (c == 'z')
 		return (15);
 	else
-		return (0);	
+		return (0);
 }
 
 int		sh_bultin_test_un_op(char **av)

@@ -41,8 +41,6 @@ void	sh_builtin_jobs(t_exec *exec, t_main *main)
 {
 	sh_exec_job_state(main->jobs);
 	sh_exec_jobs_put_signes(main);
-//оно умеет работать с аргументами, но я это на данный момент проигнорирую,
-//нужно общий принцип реализовать
 	sh_builtin_jobs_print(main->jobs);
 	sh_exec_job_del_completed(main);
 }

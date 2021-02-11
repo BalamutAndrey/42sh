@@ -161,5 +161,11 @@ int		sh_exec_job(t_main *main, t_exec *exec);
 */
 void	sh_exec_job_print_completed(t_main *main);
 
+/*
+** sh_exec_func.c
+*/
+void	sh_exec_bg_check(t_exec *exec, t_main *main);
+void	sh_exec_jobs_fin(t_main *main);
+void	sh_exec_set_pipes_exit_s(t_exec *exec, t_main *main);
 
 #endif

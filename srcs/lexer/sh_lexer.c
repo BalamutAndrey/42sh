@@ -85,83 +85,6 @@ void	sh_lexer_hub(t_main *main, t_token *token)
 		token = token->next;
 	}
 }
-/*
-void	tmp_add_alias(t_main *main)
-{
-	main->alias = sh_memalloc(sizeof(t_alias), main);
-	main->alias->next = NULL;
-	main->alias->name = ft_strdup("aa");
-	main->alias->command = ft_strdup("echo 13 |");
-}
-*/
-void	tmp_print_token(t_main *main)
-{
-	t_token	*tok;
-
-	tok = main->token;
-	while (tok)
-	{
-		ft_printf("type = %i\ntok = %s\n", tok->type, tok->content);
-		tok = tok->next;
-	}
-}
-
-void	sh_lexer_alias_assig_check(t_main *main)
-{
-	t_token	*tok;
-	int		alias;
-	int		fword;
-
-	tok = main->token;
-	alias = 0;
-	fword = 0;
-	while (tok)
-	{
-		if (tok->type == WORD)
-		{
-			if (fword == 0 && (ft_strcmp(tok->content, "alias") == 0))
-				alias = 1;
-			fword++;
-		}
-		else if (tok->type == AND_IF || tok->type == AND_OR ||
-			tok->type == SEPARATOR || tok->type == PIPELINE)
-		{
-			fword = 0;
-			alias = 0;
-		}
-		else if ((sh_lexer_alias_is_redir(tok) == 1) && tok->next &&
-			tok->next->type == WORD)
-			tok = tok->next;
-		else if (tok->type == ASSIGNMENT_WORD && alias == 1)
-			tok->type = WORD;
-		tok = tok->next;
-	}
-}
-
-void	sh_lex_remove_token(t_main *main)
-{
-	t_token		*tok;
-	t_token		*nxt;
-	t_envvar	*env;
-	t_envvar	*env_nxt;
-
-	tok = main->token;
-	while (tok)
-	{
-		ft_strdel(&tok->content);
-		env = tok->envvar;
-		while (env)
-		{
-			env_nxt = env->next;
-			env->str = NULL;
-			free(env);
-			env = env->next;
-		}
-		nxt = tok->next;
-		free(tok);
-		tok = nxt;
-	}
-}
 
 void	sh_lexer(t_main *main)
 {
@@ -179,9 +102,7 @@ void	sh_lexer(t_main *main)
 	}
 	else
 	{
-//tmp_print_token(main);
-		sh_lexer_alias_assig_check(main);
-//tmp_print_token(main);
+		sh_lexer_alias_assig_check(main->token);
 		if (main->heredoc)
 			sh_add_heredoc_content(main);
 		sh_quote_remove(main, main->token);

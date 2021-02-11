@@ -26,18 +26,14 @@ void	sh_delete_envvars(t_envvar *envvar)
 	}
 }
 
-int		sh_find_end_of_envvar(t_main *main, t_token *token, int i, t_envvar *new)
+int		sh_find_end_of_envvar(t_main *main, t_token *token, int i,
+	t_envvar *new)
 {
-//	int		count;
-
-//	count = 0;
 	if (token->content[i] == '{')
 	{
 		new->type = 2;
 		while (token->content[i])
 		{
-//			if (token->content[i] == '$')
-//				i = sh_add_envvar(1, i, main, token); Вложенность, над ней еще подумать надо.....
 			if (token->content[i] == '}')
 				return (i + 1);
 			i++;
@@ -76,8 +72,6 @@ int		sh_add_envvar(int type, int i, t_main *main, t_token *token)
 	new->str = NULL;
 	i++;
 	i = sh_find_end_of_envvar(main, token, i, new);
-//	while (ft_isalnum(token->content[i]) == 1)
-//		i++;
 	new->end = i;
 	return (i);
 }

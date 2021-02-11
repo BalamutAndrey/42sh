@@ -32,6 +32,8 @@ void	sh_add_operator_token_part_two(t_token *token)
 		token->type = LESS;
 	else if (!ft_strcmp(token->content, ">"))
 		token->type = GREAT;
+	else if (!ft_strcmp(token->content, "&"))
+		token->type = SEPARATOR;
 }
 
 void	sh_add_operator_token(t_token *token)

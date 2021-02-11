@@ -15,6 +15,7 @@
 void	sh_exit(t_exec *exec, t_main *main)
 {
 	int	code;
+
 	if (exec && exec->argv[1])
 	{
 		code = ft_atoi(exec->argv[1]);

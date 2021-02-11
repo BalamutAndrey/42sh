@@ -30,16 +30,9 @@ char	*sh_alias_arg(t_exec *exec, t_main *main)
 			sh_alias_print_one(main, exec->argv[i]);
 			if (main->alias_error)
 				err = main->alias_error;
-			// else
-			// 	fin = sh_strjoin_arg(main, "%f %f", fin, tmp);
 		}
 		i++;
 	}
-/*	if (err)
-	{
-		ft_fprintf(STDERR_FILENO, "%s", err);
-		ft_strdel(&err);
-	}*/
 	return (err);
 }
 
@@ -62,10 +55,6 @@ void	sh_alias_new(t_main *main, char *str)
 	new->next = main->alias;
 	main->alias = new;
 	sh_alias_replace(main, new->name);
-
-//	main->alias_end->next = new;
-//	main->alias_end = new;
-//	return (new);
 }
 
 void	sh_alias_replace(t_main *main, char *str)

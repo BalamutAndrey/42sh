@@ -16,12 +16,12 @@ void	sh_signal_parrent(t_main *main)
 {
 	pid_t	shell_pgid;
 
-	signal (SIGINT, SIG_IGN);
-	signal (SIGQUIT, SIG_IGN);
-	signal (SIGTSTP, SIG_IGN);
-	signal (SIGTTIN, SIG_IGN);
-	signal (SIGTTOU, SIG_IGN);
-	signal (SIGCHLD, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);
 	shell_pgid = getpid();
 	setpgid(shell_pgid, shell_pgid);
 }

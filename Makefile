@@ -58,7 +58,8 @@ PS_NAME=sh_parser.c \
 		sh_parser_heredoc_quotes_rm.c \
 		sh_parser_heredoc_struct.c \
 		sh_parser_pipe.c \
-		sh_parser_slash.c
+		sh_parser_slash.c \
+		sh_parser_funcs.c
 LX_NAME=sh_add_heredoc_content.c \
 		sh_add_operator_token.c \
 		sh_check_and_add_token.c \
@@ -70,7 +71,8 @@ LX_NAME=sh_add_heredoc_content.c \
 		sh_quote_remove_funcs.c \
 		sh_token_quote_remove.c \
 		sh_token_struct.c \
-		sh_lexer_alias_check.c
+		sh_lexer_alias_check.c \
+		sh_lexer_alias.c
 TREE_NAME=sh_and_or.c \
 		sh_brace_group.c \
 		sh_case_clause.c \
@@ -149,7 +151,8 @@ EX_NAME=sh_access_file.c \
 		sh_jobs.c \
 		sh_jobs_state.c \
 		sh_jobs_signal_pc.c \
-		sh_jobs_funcs.c
+		sh_jobs_funcs.c \
+		sh_exec_func.c
 EX_BN_NAME=sh_cd.c \
 		sh_alias.c \
 		sh_alias_arg.c \

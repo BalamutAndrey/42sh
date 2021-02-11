@@ -29,6 +29,7 @@ int		sh_find_closing_double_quotes(int i, char *str);
 /*
 **	sh_is_operator.c
 */
+void	sh_lexer_bg_check(t_main *main);
 int		sh_is_operator(char *str);
 int		sh_is_it_io_redirect_operator(char *str);
 /*
@@ -78,4 +79,11 @@ int		sh_is_protected(char *str, int i);
 */
 int		sh_lexer_alias_check(t_main *main);
 int		sh_lexer_alias_is_redir(t_token *tok);
+/*
+** sh_lexer_alias.c
+*/
+void	sh_lex_remove_token(t_main *main);
+void	sh_lexer_alias_assig_check(t_token *tok);
+int     sh_lexer_alias_assig_sep_check(int type);
+
 #endif

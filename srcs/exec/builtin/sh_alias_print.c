@@ -16,7 +16,7 @@ char	*sh_alias_err_get(char *str, t_main *main)
 {
 	char	*ret;
 
-	ret = sh_strjoin_arg(main, "%s %s %s", "42sh: alias: ", 
+	ret = sh_strjoin_arg(main, "%s %s %s", "42sh: alias: ",
 		str, ": not found\n");
 	return (ret);
 }
@@ -30,13 +30,12 @@ void	sh_alias_print(t_main *main)
 	temp = main->alias;
 	while (temp)
 	{
-		fin = sh_strjoin_arg(
-			main, "%f %s %s %s %s", fin, temp->name, "='", temp->command, "'\n");
+		fin = sh_strjoin_arg(main, "%f %s %s %s %s", fin,
+			temp->name, "='", temp->command, "'\n");
 		temp = temp->next;
 	}
 	if (fin)
 		main->alias_cont = fin;
-		//ft_fprintf(STDOUT_FILENO, "%s", fin);
 }
 
 void	sh_alias_print_one(t_main *main, char *name)
@@ -50,8 +49,8 @@ void	sh_alias_print_one(t_main *main, char *name)
 	{
 		if (ft_strcmp(name, temp->name) == 0)
 		{
-			fin = sh_strjoin_arg(
-			main, "%f %s %s %s %s", fin, temp->name, "='", temp->command, "'\n");
+			fin = sh_strjoin_arg(main, "%f %s %s %s %s", fin,
+				temp->name, "='", temp->command, "'\n");
 			temp = NULL;
 		}
 		else
@@ -60,8 +59,6 @@ void	sh_alias_print_one(t_main *main, char *name)
 	if (fin)
 		main->alias_cont = sh_strjoin_arg(main, "%f %f", main->alias_cont, fin);
 	else
-		main->alias_error = sh_strjoin_arg(main, 
+		main->alias_error = sh_strjoin_arg(main,
 			"%f %f", main->alias_error, sh_alias_err_get(name, main));
-	
-		//ft_fprintf(STDOUT_FILENO, "%s", fin);
 }
