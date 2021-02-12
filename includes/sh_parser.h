@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_parser.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 16:06:56 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/09 17:46:19 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:53:04 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void		sh_check_pipe(t_main *main);
 /*
 ** sh_parser_funcs.c
 */
-void	sh_alias_recurs_erase(t_main *main);
-int		sh_check_fbraces(t_main *main);
-int		sh_is_str_empty(char *str);
-int		sh_is_it_protected(char *str);
+void		sh_alias_recurs_erase(t_main *main);
+int			sh_check_fbraces(t_main *main);
+int			sh_is_str_empty(char *str);
+int			sh_is_it_protected(char *str);
 
 #endif

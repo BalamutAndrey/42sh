@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_jobs_signal_pc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 22:51:46 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/08 22:54:38 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:38:51 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	sh_signal_parrent(t_main *main)
 	signal(SIGCHLD, SIG_IGN);
 	shell_pgid = getpid();
 	setpgid(shell_pgid, shell_pgid);
+	// Зачем тут мейн?
+	(void)main;
 }
 
 void	sh_signal_child(void)

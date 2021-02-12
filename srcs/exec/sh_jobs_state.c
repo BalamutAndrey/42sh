@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_jobs_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 22:50:54 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/08 23:03:09 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:37:43 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,6 @@ void	sh_exec_job_del_completed(t_main *main)
 	{
 		sh_jobs_check_not_first(j);
 	}
+	// Нужен ли тут prev?
+	(void)prev;
 }

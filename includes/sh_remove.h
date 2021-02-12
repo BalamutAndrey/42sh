@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_remove.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:57:04 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/09 00:42:18 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:52:22 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	sh_remove_alias(t_main *temp);
 /*
 ** sh_remove_jobs.c
 */
-void    sh_remove_jobs(t_main *main);
+void	sh_remove_jobs(t_main *main);
 
 #endif

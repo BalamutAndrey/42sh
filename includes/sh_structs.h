@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_structs.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:26:51 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/06 19:17:35 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 16:01:21 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ typedef struct			s_exec {
 	struct s_exec		*next;
 }						t_exec;
 
-typedef struct 			s_alias {
+typedef struct			s_alias
+{
 	char				*name;
 	char				*command;
 	int					recurs;

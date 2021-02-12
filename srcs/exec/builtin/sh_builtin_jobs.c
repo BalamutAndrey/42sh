@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin_jobs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 17:52:50 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/07 18:26:32 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:40:13 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,6 @@ void	sh_builtin_jobs(t_exec *exec, t_main *main)
 	sh_exec_jobs_put_signes(main);
 	sh_builtin_jobs_print(main->jobs);
 	sh_exec_job_del_completed(main);
+	// Зачем тут exec?
+	(void)exec;
 }

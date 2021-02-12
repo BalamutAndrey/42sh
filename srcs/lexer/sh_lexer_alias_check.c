@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_lexer_alias_check.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:14:11 by geliz             #+#    #+#             */
-/*   Updated: 2021/01/17 15:04:34 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:49:20 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int		sh_lexer_alias_selection(t_main *main, t_token *tok)
 		{
 			ft_strdel(&tmp);
 			tmp = sh_strdup(al->command, main);
-			if ((ft_strcmp(al->command, tok->content) == 0 && al->recurs == 1) || al->recurs == 2)
+			if ((ft_strcmp(al->command, tok->content) == 0 &&
+				al->recurs == 1) || al->recurs == 2)
 			{
 				ret = 0;
 				al = NULL;
@@ -95,7 +96,7 @@ void	sh_alias_recurs_change(t_main *main)
 void	sh_alias_space_next_token_check(t_main *main, t_token *tok)
 {
 	if (tok->next && tok->next->type == WORD &&	ft_strlen(tok->content) > 0 &&
-		tok->content[ft_strlen(tok->content) - 1] == ' ')
+	tok->content[ft_strlen(tok->content) - 1] == ' ')
 	{
 		if (sh_lexer_alias_selection(main, tok->next) == 1)
 			sh_alias_space_next_token_check(main, tok->next);

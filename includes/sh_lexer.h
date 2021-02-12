@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_lexer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 16:38:41 by eboris            #+#    #+#             */
-/*   Updated: 2021/01/06 16:21:12 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:53:36 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int		sh_lexer_alias_is_redir(t_token *tok);
 */
 void	sh_lex_remove_token(t_main *main);
 void	sh_lexer_alias_assig_check(t_token *tok);
-int     sh_lexer_alias_assig_sep_check(int type);
+int		sh_lexer_alias_assig_sep_check(int type);
 
 #endif

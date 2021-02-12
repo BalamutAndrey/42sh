@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:00 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/08 23:44:06 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:27:06 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,18 @@ char	*sh_change_envvars_in_redir_struct(t_main *main, t_envvar *envvar);
 /*
 ** sh_envvar_func.c
 */
-char	*sh_find_envvar_in_env(char **env, t_envvar *envvar, t_main *main);
-char	*sh_get_envvar_from_str(t_envvar *envvar, t_main *main);
+int		sh_search_condition_more(char *tmp);
+int		sh_search_condition(t_envvar *envvar, t_main *main);
+char	*sh_env_cont_with_cond(t_envvar *envvar, t_main *main);
 void	sh_envvar_add_shift_to_struct(t_envvar *envvar, char *new_str,
 	int shift);
+
+/*
+** sh_envvar_func_envvar.c
+*/
+char	*sh_get_envvar_from_str(t_envvar *envvar, t_main *main);
+char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar);
+
 /*
 ** sh_access_file.c
 */

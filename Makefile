@@ -135,6 +135,7 @@ ES_NAME=sh_exec_struct_argv.c \
 		sh_exec_struct_envvar.c
 EX_NAME=sh_access_file.c \
 		sh_envvar_func.c \
+		sh_envvar_func_envvar.c \
 		sh_envvar_in_exec.c \
 		sh_envvar_in_redirs.c \
 		sh_exec.c \

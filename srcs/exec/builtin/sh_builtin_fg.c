@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_builtin_fg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 17:53:34 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/09 00:42:05 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:33:40 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	*sh_builtin_fg_current(t_main *main, char *number, t_exec *exec)
 		return (sh_strdup("fg: no such job\n", main));
 	else
 		sh_builtin_fg_action(main, job, exec);
+	//Небыло ретурна???
+	return(NULL);
 }
 
 int		sh_builtin_fg_check_num(char *str)
