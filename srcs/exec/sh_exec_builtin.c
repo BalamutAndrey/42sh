@@ -6,7 +6,7 @@
 /*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/12 15:36:42 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/12 20:16:23 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*sh_exec_builtin(t_exec *exec, t_main *main)
 		sh_builtin_echo(main, exec);
 	}
 	else if (ft_strcmp(exec->argv[0], "exit") == 0)
-		sh_exit(exec, main);
+		finish = sh_exit(exec, main);
 	else if (ft_strcmp(exec->argv[0], "alias") == 0)
 		finish = sh_alias(exec, main);
 	else if (ft_strcmp(exec->argv[0], "type") == 0)
