@@ -21,7 +21,7 @@ void	sh_sig_ctrl_z(int a)
 	{
 		tcsetattr(g_main->fd, TCSANOW, &g_main->t_curr);
 		kill(g_main->cpid, SIGSTOP);
-		g_main->cpid = -1;
+//		g_main->cpid = -1;
 		ft_putstr_fd(tgetstr("do", NULL), g_main->fd);
 		ft_putstr_fd(tgetstr("cr", NULL), g_main->fd);
 	}

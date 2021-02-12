@@ -55,7 +55,7 @@ void	sh_redirect_from_heredoc(t_redirect *here)
 		close(here_fd[1]);
 		close(here_fd[0]);
 		waitpid(here_pid, &status, 0);
-		sh_signal_status(status, here_pid);
+//		sh_signal_status(status, here_pid);
 	}
 }
 

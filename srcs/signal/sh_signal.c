@@ -33,6 +33,6 @@ void	sh_signal_status(int status, pid_t pid)
 			ft_fprintf(STDERR_FILENO, "Abort trap: ");
 		else if (status == SIGFPE)
 			ft_fprintf(STDERR_FILENO, "Floating point exception: ");
-		ft_fprintf(STDERR_FILENO, "Status code: %i\n", status);
+//		ft_fprintf(STDERR_FILENO, "Status code: %i\n", status);
 	}
 }

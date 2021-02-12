@@ -37,7 +37,7 @@ void	sh_std_in_out_pipe(t_exec *exec, int fd[2], int fd2[2], t_main *main)
 		waitpid(pid, &status, 0);
 		exec->exit_s = status;
 		main->cpid = -1;
-		sh_signal_status(status, pid);
+//		sh_signal_status(status, pid);
 	}
 }
 
@@ -62,7 +62,7 @@ void	sh_stdin_pipe(t_exec *exec, int fd[2], t_main *main)
 		waitpid(pid, &status, 0);
 		exec->exit_s = status;
 		main->cpid = -1;
-		sh_signal_status(status, pid);
+//		sh_signal_status(status, pid);
 	}
 }
 
@@ -87,7 +87,7 @@ void	sh_stdout_pipe(t_exec *exec, int fd[2], t_main *main)
 		waitpid(pid, &status, 0);
 		exec->exit_s = status;
 		main->cpid = -1;
-		sh_signal_status(status, pid);
+//		sh_signal_status(status, pid);
 	}
 }
 

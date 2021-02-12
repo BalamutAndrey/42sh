@@ -122,8 +122,10 @@ void	sh_exec(t_main *main, t_exec *exec)
 		if (exec->next && exec->next->pipe == true)
 		{
 			sh_exec_piped_commands(exec, main);
-			exec = exec->next;
 			sh_exec_set_pipes_exit_s(exec, main);
+			exec = exec->next;
+			while (exec && exec->pipe == true)
+				exec = exec->next;
 		}
 		else
 		{
@@ -135,7 +137,7 @@ void	sh_exec(t_main *main, t_exec *exec)
 			exec = sh_or_if_and_if_check(exec);
 		}
 		tcsetpgrp(STDOUT_FILENO, main->pid);
-		tcsetattr(STDOUT_FILENO, TCSADRAIN, &main->t_curr);
+		tcsetattr(STDOUT_FILENO, TCSANOW, &main->t_curr);
 	}
 	sh_exec_jobs_fin(main);
 }
