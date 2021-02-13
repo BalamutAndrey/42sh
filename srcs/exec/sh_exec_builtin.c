@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 17:43:11 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/12 20:16:23 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 19:36:33 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	sh_exec_check_stout(t_exec *exec)
 {
 	t_redirect	*tmp;
-	char		*ret;
 
 	tmp = exec->redir;
 	while (tmp)
@@ -24,8 +23,6 @@ void	sh_exec_check_stout(t_exec *exec)
 			exit(1);
 		tmp = tmp->next;
 	}
-	//Нужен ли тут ret?
-	(void)ret;
 }
 
 char	*sh_exec_other_builtin(t_exec *exec, t_main *main, char *finish)

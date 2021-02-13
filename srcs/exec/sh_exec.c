@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 16:29:08 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/10 01:25:27 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/13 19:46:16 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,99 +33,30 @@ void	sh_exec_print_error(int16_t error, t_main *main)
 	exit(2);
 }
 
-int16_t	sh_exec_prog(t_exec *exec, t_main *main, char *err_built)
+t_exec	*sh_exec_pipes_hub(t_exec *exec, t_main *main)
 {
-	int16_t	error;
-
-	error = -1;
-	sh_path_add(main, exec);
-	if (!exec->argv)
-		return (-1);
-	else if (sh_run_access(exec->argv) == 6)
-		sh_exec_builtin(exec, main);
-	else if (err_built != NULL)
-	{
-		ft_fprintf(STDERR_FILENO, "%s", err_built);
-		ft_strdel(&err_built);
-	}
-	else if ((error = sh_run_access(exec->argv)) == 0)
-	{
-		sh_exec_setpgid(exec->bg, main);
-		sh_signal_child();
-		execve(exec->argv[0], exec->argv, main->envp_curr);
-	}
-	return (error);
-}
-
-void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built)
-{
-	pid_t	cpid;
-	int16_t	err;
-	int		r_err;
-	int		status;
-
-	r_err = 0;
-	if (err_built || (sh_run_access(exec->argv) != 5) || main->alias_cont)
-	{
-		cpid = fork();
-		if (cpid == 0)
-		{
-			if (exec->redir)
-				r_err = sh_redirects_hub(exec, main);
-			if (r_err >= 0 && (((err = sh_exec_prog(exec, main,
-					err_built)) != 0) || main->alias_cont))
-				sh_exec_print_error(err, main);
-		}
-		else
-		{
-			main->cpid = cpid;
-			status = sh_exec_job(main, exec);
-			ft_strdel(&err_built);
-//			sh_signal_status(status, cpid);
-		}
-	}
-}
-
-void	sh_standart_exec(t_exec *exec, t_main *main)
-{
-	int16_t	error;
-	char	*err_built;
-	int		redir_err;
-
-	err_built = NULL;
-	redir_err = 0;
-	if (exec->pipe == true || (exec->next && exec->next->pipe == true))
-	{
-		if (exec->redir)
-			redir_err = sh_redirects_hub(exec, main);
-		if (sh_run_access(exec->argv) == 5)
-			err_built = sh_exec_builtin(exec, main);
-		if (redir_err >= 0 &&
-			(error = sh_exec_prog(exec, main, err_built)) != 0)
-			sh_exec_print_error(error, main);
-	}
-	else
-	{
-		if (sh_run_access(exec->argv) == 5)
-			err_built = sh_exec_builtin(exec, main);
-		sh_exec_standart_fork(exec, main, err_built);
-	}
+	sh_exec_piped_commands(exec, main);
+	sh_exec_set_pipes_exit_s(exec, main);
+	exec = exec->next;
+	while (exec && exec->pipe == true)
+		exec = exec->next;
+	setpgid(0, 0);
+	tcsetpgrp(STDOUT_FILENO, main->pid);
+	return (exec);
 }
 
 void	sh_exec(t_main *main, t_exec *exec)
 {
 	while (exec)
 	{
+		main->exec_curr = exec;
 		if (!main->vars)
 			sh_get_vars_from_env(main);
+		tcsetattr(main->fd, TCSANOW, &main->t_start);
 		sh_signal_parrent(main);
 		if (exec->next && exec->next->pipe == true)
 		{
-			sh_exec_piped_commands(exec, main);
-			sh_exec_set_pipes_exit_s(exec, main);
-			exec = exec->next;
-			while (exec && exec->pipe == true)
-				exec = exec->next;
+			exec = sh_exec_pipes_hub(exec, main);
 		}
 		else
 		{
@@ -136,8 +67,7 @@ void	sh_exec(t_main *main, t_exec *exec)
 			main->ex_code = exec->exit_s;
 			exec = sh_or_if_and_if_check(exec);
 		}
-		tcsetpgrp(STDOUT_FILENO, main->pid);
-		tcsetattr(STDOUT_FILENO, TCSANOW, &main->t_curr);
+		tcsetattr(main->fd, TCSANOW, &main->t_curr);
 	}
 	sh_exec_jobs_fin(main);
 }

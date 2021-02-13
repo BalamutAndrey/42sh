@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_remove_jobs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 00:38:27 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/12 17:11:13 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 18:37:22 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sh_remove_jobs(t_main *main)
 	while (tmp)
 	{
 		nxt = tmp->next;
-		sh_job_remove(tmp);
+		sh_job_remove(&tmp);
 		tmp = nxt;
 	}
 	main->jobs = NULL;

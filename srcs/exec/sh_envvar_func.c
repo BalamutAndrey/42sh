@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_envvar_func.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:48:25 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/12 15:24:57 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:20:21 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*sh_env_cont_with_cond(t_envvar *envvar, t_main *main)
 	cond = sh_search_condition(envvar, main);
 	if (cond == -1)
 	{
+		envvar->type = -1;
 		return (NULL);
 	}
 	if (cond == 0)

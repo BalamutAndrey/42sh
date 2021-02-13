@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:48:30 by geliz             #+#    #+#             */
-/*   Updated: 2020/12/13 18:25:26 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/13 20:29:38 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ char	*sh_change_envvars_in_redir_struct(t_main *main, t_envvar *envvar)
 	char	*env_cont;
 	char	*before_var;
 	char	*after_var;
+	int		rm_fl;
 
 	before_var = NULL;
 	after_var = NULL;
-	env_cont = sh_find_envvar_in_vars(main, envvar);
+	env_cont = sh_find_envvar_in_vars(main, envvar, &rm_fl);
 	envvar->type = ft_strlen(env_cont) - (envvar->end - envvar->start);
 	if (envvar->start > 0)
 		before_var = sh_strsub(envvar->str, 0, envvar->start, main);

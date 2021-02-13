@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:48:28 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/01 17:31:06 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/13 20:28:48 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ char	*sh_change_envvars_in_exec_struct(t_main *main, t_envvar *envvar)
 	char	*env_cont;
 	char	*before_var;
 	char	*after_var;
+	int		rm_fl;
 
 	before_var = NULL;
 	after_var = NULL;
-	env_cont = sh_find_envvar_in_vars(main, envvar);
+	env_cont = sh_find_envvar_in_vars(main, envvar, &rm_fl);
 	envvar->type = ft_strlen(env_cont) - (envvar->end - envvar->start);
 	if (envvar->start > 0)
 		before_var = sh_strsub(envvar->str, 0, envvar->start, main);
@@ -31,7 +32,11 @@ char	*sh_change_envvars_in_exec_struct(t_main *main, t_envvar *envvar)
 	if (envvar->start == 0 && envvar->str[envvar->end] == '\0' && !env_cont)
 		ret = sh_strnew(0, main);
 	else
+	{
 		ret = sh_strjoin_arg(main, "%f %s %f", before_var, env_cont, after_var);
+		if (rm_fl == 1)
+			ft_strdel(&env_cont);
+	}
 	return (ret);
 }
 

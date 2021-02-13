@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:00 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/12 15:27:06 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:28:22 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	sh_find_path(t_main *main, t_exec *exec);
 /*
 ** sh_envvar_in_exec.c
 */
-char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar);
 void	sh_change_envvars_in_exec(t_main *main, t_exec *exec);
 void	sh_envvar_change_argv(t_envvar *envvar, t_exec *exec, char *new_str);
 char	*sh_change_envvars_in_exec_struct(t_main *main, t_envvar *envvar);
@@ -114,7 +113,7 @@ void	sh_envvar_add_shift_to_struct(t_envvar *envvar, char *new_str,
 ** sh_envvar_func_envvar.c
 */
 char	*sh_get_envvar_from_str(t_envvar *envvar, t_main *main);
-char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar);
+char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar, int *fl);
 
 /*
 ** sh_access_file.c
@@ -135,7 +134,7 @@ void	sh_exit_code_check(t_exec *exec, int status);
 /*
 ** sh_jobs_funcs.c
 */
-void	sh_job_remove(t_jobs *job);
+void	sh_job_remove(t_jobs **job);
 t_jobs	*sh_exec_new_job(pid_t pid, char *cmd, t_main *main);
 char	*sh_exec_job_get_cmd(char **argv, t_main *main);
 void	sh_exec_jobs_put_signes(t_main *main);
@@ -175,5 +174,16 @@ void	sh_exec_job_print_completed(t_main *main);
 void	sh_exec_bg_check(t_exec *exec, t_main *main);
 void	sh_exec_jobs_fin(t_main *main);
 void	sh_exec_set_pipes_exit_s(t_exec *exec, t_main *main);
+/*
+** sh_exec_pid_wait.c
+*/
+void	sh_exec_pid_wait(t_main *main, t_exec *exec);
+/*
+** sh_exec_fork.c
+*/
+void	sh_standart_exec(t_exec *exec, t_main *main);
+void	sh_exec_standart_fork(t_exec *exec, t_main *main, char *err_built);
+void	sh_exec_standart_fork_parrent(t_main *main, pid_t cpid, t_exec *exec);
+int16_t	sh_exec_prog(t_exec *exec, t_main *main, char *err_built);
 
 #endif

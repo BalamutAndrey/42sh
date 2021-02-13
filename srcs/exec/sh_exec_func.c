@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_exec_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:17:24 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/12 15:17:27 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 18:32:42 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	sh_exec_jobs_fin(t_main *main)
 	sh_exec_job_print_completed(main);
 	sh_exec_job_del_completed(main);
 	main->bg = false;
+	main->cpid = -1;
 }
 
 void	sh_exec_bg_check(t_exec *exec, t_main *main)

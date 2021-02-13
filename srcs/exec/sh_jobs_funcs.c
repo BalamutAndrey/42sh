@@ -6,16 +6,23 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 22:48:48 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/08 23:03:40 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/13 19:34:27 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_main.h"
 
-void	sh_job_remove(t_jobs *job)
+void	sh_job_remove(t_jobs **job)
 {
-	ft_strdel(&job->cmd);
-	free(job);
+	char	*rm;
+
+	if (job && *job)
+	{
+		rm = (*job)->cmd;
+		ft_strdel(&rm);
+		free(*job);
+		*job = NULL;
+	}
 }
 
 t_jobs	*sh_exec_new_job(pid_t pid, char *cmd, t_main *main)

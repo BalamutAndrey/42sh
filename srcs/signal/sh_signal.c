@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 17:27:09 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/01 18:31:14 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:44:43 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,25 @@ void	sh_signal_status(int status, pid_t pid)
 {
 	if (!WIFEXITED(status))
 	{
-		kill(pid, 1);
 		if (status == SIGSEGV)
-			ft_fprintf(STDERR_FILENO, "Segmentation fault: ");
+		{
+			ft_fprintf(STDERR_FILENO, "Segmentation fault\n");
+			kill(pid, 1);
+		}
 		else if (status == SIGBUS)
-			ft_fprintf(STDERR_FILENO, "Bus error: ");
+		{
+			ft_fprintf(STDERR_FILENO, "Bus error\n");
+			kill(pid, 1);
+		}
 		else if (status == SIGABRT)
-			ft_fprintf(STDERR_FILENO, "Abort trap: ");
+		{
+			ft_fprintf(STDERR_FILENO, "Abort trap\n");
+			kill(pid, 1);
+		}
 		else if (status == SIGFPE)
-			ft_fprintf(STDERR_FILENO, "Floating point exception: ");
-//		ft_fprintf(STDERR_FILENO, "Status code: %i\n", status);
+		{
+			ft_fprintf(STDERR_FILENO, "Floating point exception\n");
+			kill(pid, 1);
+		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_jobs_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 22:50:54 by geliz             #+#    #+#             */
-/*   Updated: 2021/02/12 15:37:43 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 18:37:53 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	sh_jobs_check_not_first(t_jobs *j)
 		if (j->state == DONE)
 		{
 			prev->next = j->next;
-			sh_job_remove(j);
+			sh_job_remove(&j);
 			j = prev->next;
 		}
 		else
@@ -75,7 +75,6 @@ void	sh_jobs_check_not_first(t_jobs *j)
 void	sh_exec_job_del_completed(t_main *main)
 {
 	t_jobs	*j;
-	t_jobs	*prev;
 
 	j = main->jobs;
 	if (!main->jobs)
@@ -83,13 +82,11 @@ void	sh_exec_job_del_completed(t_main *main)
 	if (j->state == DONE)
 	{
 		main->jobs = j->next;
-		sh_job_remove(j);
+		sh_job_remove(&j);
 		sh_exec_job_del_completed(main);
 	}
 	else
 	{
 		sh_jobs_check_not_first(j);
 	}
-	// Нужен ли тут prev?
-	(void)prev;
 }

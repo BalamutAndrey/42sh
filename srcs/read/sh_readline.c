@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 16:16:02 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/07 18:18:16 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/13 19:33:51 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	sh_readline(t_main *main)
 		sh_exec_job_state(main->jobs);
 		sh_exec_job_print_completed(main);
 		sh_exec_job_del_completed(main);
-		tcsetattr(main->fd, TCSANOW, &main->t_curr);
 	}
 }
 

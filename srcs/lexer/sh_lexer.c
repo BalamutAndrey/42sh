@@ -6,7 +6,7 @@
 /*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:13:46 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/01 17:30:18 by geliz            ###   ########.fr       */
+/*   Updated: 2021/02/13 19:22:41 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	sh_lexer(t_main *main)
 	main->token = first->next;
 	free(first);
 	first = NULL;
-	if (sh_lexer_alias_check(main) == 1)
+	if (sh_lexer_alias_check(main, main->token) == 1)
 	{
 		sh_lex_remove_token(main);
 		sh_lexer(main);

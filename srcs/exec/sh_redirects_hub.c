@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_redirects_hub.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 17:36:57 by geliz             #+#    #+#             */
-/*   Updated: 2020/11/20 15:55:25 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 19:35:08 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	sh_redirect_from_heredoc(t_redirect *here)
 		close(here_fd[1]);
 		close(here_fd[0]);
 		waitpid(here_pid, &status, 0);
-//		sh_signal_status(status, here_pid);
 	}
 }
 

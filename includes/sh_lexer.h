@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_lexer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 16:38:41 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/12 15:53:36 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 19:22:10 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		sh_is_protected(char *str, int i);
 /*
 ** sh_lexer_alias_check.c
 */
-int		sh_lexer_alias_check(t_main *main);
+int		sh_lexer_alias_check(t_main *main, t_token *tok);
 int		sh_lexer_alias_is_redir(t_token *tok);
 /*
 ** sh_lexer_alias.c
@@ -85,5 +85,11 @@ int		sh_lexer_alias_is_redir(t_token *tok);
 void	sh_lex_remove_token(t_main *main);
 void	sh_lexer_alias_assig_check(t_token *tok);
 int		sh_lexer_alias_assig_sep_check(int type);
+/*
+** sh_lexer_alias_funcs.c
+*/
+int		sh_lexer_alias_selection(t_main *main, t_token *tok);
+void	sh_lexer_alias_change(t_main *main);
+int		sh_lexer_alias_is_redir(t_token *tok);
 
 #endif

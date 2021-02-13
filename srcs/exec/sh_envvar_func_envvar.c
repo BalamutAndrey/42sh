@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_envvar_func_envvar.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eboris <eboris@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: geliz <geliz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:23:47 by eboris            #+#    #+#             */
-/*   Updated: 2021/02/12 15:25:02 by eboris           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:27:36 by geliz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,19 @@ char	*sh_get_envvar_from_str(t_envvar *envvar, t_main *main)
 	return (var);
 }
 
-char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar)
+char	*sh_find_envvar_in_vars(t_main *main, t_envvar *envvar, int *fl)
 {
 	char	*var;
 	t_vars	*tmp;
 
+	*fl = 0;
 	tmp = main->vars;
 	var = sh_get_envvar_from_str(envvar, main);
 	if (!var)
+	{
+		*fl = 1;
 		return (ft_itoa(main->ex_code));
+	}
 	while (tmp)
 	{
 		if (ft_strcmp(var, tmp->name) == 0)
